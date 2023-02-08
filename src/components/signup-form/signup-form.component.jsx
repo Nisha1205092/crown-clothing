@@ -1,3 +1,5 @@
+import Button from "../button/button.component";
+import "./signup-form.styles.scss";
 import { useState } from "react";
 import { 
     createAuthUserWithEmailAndPassword, 
@@ -52,8 +54,9 @@ const SignUpForm = () => {
         //create a userdoc with what that returns
     }
     return (
-        <div>
-            <h1>Sign up with your email and password</h1>
+        <div className="sign-up-form-container">
+            <h2>Don't have an account?</h2>
+            <span>Sign up with your email and password</span>
             <form action="" onSubmit={handleSubmit}>
                 <FormInput
                     label="Display Name"
@@ -91,7 +94,7 @@ const SignUpForm = () => {
                     value={confirmPassword}
                 />
 
-                <button type="submit">Sign Up</button>
+                <Button type="submit">Sign Up</Button>
 
             </form>
         </div>
