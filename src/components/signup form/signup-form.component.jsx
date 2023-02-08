@@ -41,6 +41,8 @@ const SignUpForm = () => {
         } catch(error) {
             if (error.code === 'auth/email-already-in-use') {
                 alert('email already exists');
+            } else if(error.code === 'auth/weak-password') {
+                alert('weak password');
             } else {
                 console.log('error creating user', error.code);
             }
