@@ -13,14 +13,14 @@ import {
 import FormInput from '../form-input/form-input.component';
 import SignUpForm from "../signup-form/signup-form.component";
 import { createAuthUserWithEmailAndPassword } from '../../utils/firebase/firebase.utils';
-import '../signup-form/signup-form.styles.scss';
+import './sign-in-form.styles.scss';
 import Button from '../button/button.component';
 
 const defaultFormFields = {
     email: '',
     password: ''
 };
-const SignIn = () => {
+const SignInForm = () => {
     const [formFields, setFormFields] = useState(defaultFormFields);
     const { email, password } = formFields;
 
@@ -73,7 +73,9 @@ const SignIn = () => {
 
 
     return (
-        <div className='sign-up-form-container'>
+
+
+        <div className='sign-in-form-container'>
             <h2>I already have an account</h2>
             <span>Sign in with your email and password</span>
             <form action="" onSubmit={handleSubmit}>
@@ -96,15 +98,18 @@ const SignIn = () => {
 
                 <Button type="submit">Sign In</Button>
             </form>
-            <button onClick={logGoogleUser}>
+
+            <Button onClick={logGoogleUser} buttonType={'google'}>
                 SignIn with Google Popup
-            </button>
-            <button onClick={signInWithGoogleRedirect}>
+            </Button>
+            <Button onClick={signInWithGoogleRedirect} buttonType={'redir'}>
                 SignIn with Google Redirect
-            </button>
-            <SignUpForm />
+            </Button>
+
+
         </div>
+
     );
 }
 
-export default SignIn;
+export default SignInForm;

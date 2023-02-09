@@ -25,6 +25,7 @@
     &.google-sign-in {
       background-color: #4285f4;
       color: white;
+      width: 270px;
   
       &:hover {
         background-color: #357ae8;
@@ -41,6 +42,17 @@
         background-color: black;
         color: white;
         border: none;
+      }
+    }
+    &.google-redirect {
+      background-color: rgb(45, 204, 31);
+      color: black;
+      border: 1px solid black;
+  
+      &:hover {
+        background-color: rgb(80, 228, 66);
+        color: black;
+        border: 1px solid black;
       }
     }
   }
