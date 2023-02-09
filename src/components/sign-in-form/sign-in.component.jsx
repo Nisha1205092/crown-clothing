@@ -95,16 +95,26 @@ const SignInForm = () => {
                     name="password"
                     value={password}
                 />
+                <div className='redirect-container'>
+                    <div className='sign-in-buttons-container'>
+                        <Button type="submit">Sign In</Button>
+                        <Button onClick={logGoogleUser} buttonType={'google'}>
+                            Google Sign In
+                        </Button>
+                    </div>
+                    <div className='redirect-button'>
+                        <Button onClick={signInWithGoogleRedirect} buttonType={'redir'}>
+                            Google Redirect
+                        </Button>
+                    </div>
 
-                <Button type="submit">Sign In</Button>
+
+                </div>
+
+
             </form>
 
-            <Button onClick={logGoogleUser} buttonType={'google'}>
-                SignIn with Google Popup
-            </Button>
-            <Button onClick={signInWithGoogleRedirect} buttonType={'redir'}>
-                SignIn with Google Redirect
-            </Button>
+
 
 
         </div>
