@@ -11,8 +11,6 @@ import {
     createUserDocumentFromAuth
 } from "../../utils/firebase/firebase.utils";
 import FormInput from '../form-input/form-input.component';
-import SignUpForm from "../signup-form/signup-form.component";
-import { createAuthUserWithEmailAndPassword } from '../../utils/firebase/firebase.utils';
 import './sign-in-form.styles.scss';
 import Button from '../button/button.component';
 
@@ -63,6 +61,9 @@ const SignInForm = () => {
             console.log('user signing in ', user);
             resetFormFields();
         } catch (error) {
+            if (error.code === 'auth/user-not-found') {
+                alert('email not found!');
+            }
             console.log('error signing in user', error.code);
         }
 
