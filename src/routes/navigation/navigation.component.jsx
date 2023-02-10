@@ -1,9 +1,12 @@
 import './navigation.styles.scss';
 import { Outlet, Link } from 'react-router-dom';
-import { Fragment } from 'react';
-import { ReactComponent as CrownLogo} from '../../assets/crown.svg';
+import { Fragment, useContext } from 'react';
+import { ReactComponent as CrownLogo } from '../../assets/crown.svg';
+import { UserContext } from '../../contexts/user.context';
 
-const Nav = () => {
+const Navigation = () => {
+    const { currentUser } = useContext(UserContext);
+    console.log(currentUser);
     return (
         <Fragment>
             <div className='navigation'>
@@ -24,4 +27,4 @@ const Nav = () => {
     );
 }
 
-export default Nav;
+export default Navigation;

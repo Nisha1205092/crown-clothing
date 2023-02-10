@@ -1,6 +1,7 @@
 import {
     useEffect,
-    useState
+    useState, 
+    useContext
 } from 'react';
 import { getRedirectResult } from 'firebase/auth';
 import {
@@ -13,6 +14,7 @@ import {
 import FormInput from '../form-input/form-input.component';
 import './sign-in-form.styles.scss';
 import Button from '../button/button.component';
+import { UserContext } from '../../contexts/user.context';
 
 const defaultFormFields = {
     email: '',
@@ -21,6 +23,8 @@ const defaultFormFields = {
 const SignInForm = () => {
     const [formFields, setFormFields] = useState(defaultFormFields);
     const { email, password } = formFields;
+
+    const { setCurrentUser } = useContext(UserContext);  
 
     useEffect(() => {
         async function fetchData() {
@@ -59,8 +63,10 @@ const SignInForm = () => {
             // console.log('password received ', password);
             const { user } = await logInWithEmailAndPassword(email, password);
             console.log('user signing in ', user);
+            setCurrentUser(user);
             resetFormFields();
             alert('Sign in successful');
+            // store it inside the UserContext
         } catch (error) {
             console.log('error signing in user');
         }
