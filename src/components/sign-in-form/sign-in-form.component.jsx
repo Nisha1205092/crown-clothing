@@ -97,12 +97,12 @@ const SignInForm = () => {
                 <div className='redirect-container'>
                     <div className='sign-in-buttons-container'>
                         <Button type="submit">Sign In</Button>
-                        <Button onClick={logGoogleUser} buttonType={'google'}>
+                        <Button type="button" onClick={logGoogleUser} buttonType={'google'}>
                             Google Sign In
                         </Button>
                     </div>
                     <div className='redirect-button'>
-                        <Button onClick={signInWithGoogleRedirect} buttonType={'redir'}>
+                        <Button type="button" onClick={signInWithGoogleRedirect} buttonType={'redir'}>
                             Google Redirect
                         </Button>
                     </div>
