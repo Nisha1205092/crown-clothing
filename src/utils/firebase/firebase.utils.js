@@ -91,7 +91,7 @@ export const logInWithEmailAndPassword = async (email, password) => {
         if (error.code === 'auth/user-not-found') {
             alert('Email not found!');
         } else if (error.code === 'auth/wrong-password') {
-            alert('Password do not match!');
+            alert('Password does not match!');
         }
     }
 };
