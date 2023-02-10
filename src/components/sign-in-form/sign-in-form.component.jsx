@@ -60,6 +60,7 @@ const SignInForm = () => {
             const { user } = await logInWithEmailAndPassword(email, password);
             console.log('user signing in ', user);
             resetFormFields();
+            alert('Sign in successful');
         } catch (error) {
             console.log('error signing in user');
         }

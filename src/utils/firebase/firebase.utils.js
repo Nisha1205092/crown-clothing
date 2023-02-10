@@ -88,10 +88,15 @@ export const logInWithEmailAndPassword = async (email, password) => {
         return await signInWithEmailAndPassword(auth, email, password);
         // console.log('user credentials ', userCredentials);
     } catch (error) {
-        if (error.code === 'auth/user-not-found') {
-            alert('Email not found!');
-        } else if (error.code === 'auth/wrong-password') {
-            alert('Password does not match!');
+        switch(error.code) {
+            case 'auth/user-not-found':
+                alert('Email not found!');
+                break;
+            case 'auth/wrong-password':
+                alert('Password does not match!');
+                break;
+            default:
+                console.log(error.message);
         }
     }
 };
