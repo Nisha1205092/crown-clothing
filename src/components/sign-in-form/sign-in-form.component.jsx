@@ -72,8 +72,6 @@ const SignInForm = () => {
 
 
     return (
-
-
         <div className='sign-in-form-container'>
             <h2>I already have an account</h2>
             <span>Sign in with your email and password</span>
@@ -106,16 +104,8 @@ const SignInForm = () => {
                             Google Redirect
                         </Button>
                     </div>
-
-
                 </div>
-
-
             </form>
-
-
-
-
         </div>
 
     );
