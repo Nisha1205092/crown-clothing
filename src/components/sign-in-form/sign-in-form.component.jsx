@@ -1,7 +1,6 @@
 import {
     useEffect,
-    useState, 
-    useContext
+    useState
 } from 'react';
 import { getRedirectResult } from 'firebase/auth';
 import {
@@ -14,7 +13,6 @@ import {
 import FormInput from '../form-input/form-input.component';
 import './sign-in-form.styles.scss';
 import Button from '../button/button.component';
-import { UserContext } from '../../contexts/user.context';
 
 const defaultFormFields = {
     email: '',
@@ -24,8 +22,6 @@ const SignInForm = () => {
     const [formFields, setFormFields] = useState(defaultFormFields);
     const { email, password } = formFields;
 
-    const { setCurrentUser } = useContext(UserContext);  
-
     useEffect(() => {
         async function fetchData() {
             // You can await here
@@ -33,18 +29,13 @@ const SignInForm = () => {
             console.log(response);
             if (response) {
                 const userDocRef = createUserDocumentFromAuth(response.user);
-                setCurrentUser(response.user);
             }
             // ...
         }
         fetchData();
     }, []);
     const logGoogleUser = async () => {
-        const { user } = await signInWithGooglePopup();
-        setCurrentUser(user);
-        // console.log('logGoogleUser ', user);
-        const userDocRef = createUserDocumentFromAuth(user);
-        // console.log('userDocRef ', userDocRef);
+        await signInWithGooglePopup();
 
     };
 
@@ -65,7 +56,6 @@ const SignInForm = () => {
             // console.log('password received ', password);
             const { user } = await logInWithEmailAndPassword(email, password);
             console.log('user signing in ', user);
-            setCurrentUser(user);
             resetFormFields();
             alert('Sign in successful');
             // store it inside the UserContext

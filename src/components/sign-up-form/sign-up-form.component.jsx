@@ -1,12 +1,11 @@
 import Button from "../button/button.component";
 import "./sign-up-form.styles.scss";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { 
     createAuthUserWithEmailAndPassword, 
     createUserDocumentFromAuth 
 } from "../../utils/firebase/firebase.utils";
 import FormInput from "../form-input/form-input.component";
-import { UserContext } from "../../contexts/user.context";
 
 const defaultFormFields = {
     displayName: '',
@@ -28,8 +27,6 @@ const SignUpForm = () => {
         setFormFields({ ...formFields, [name]: value });
     };
 
-    const { setCurrentUser } = useContext(UserContext);
-
     const handleSubmit = async (event) => {
         event.preventDefault();
         //confirm password match
@@ -41,8 +38,6 @@ const SignUpForm = () => {
             const { user } = await createAuthUserWithEmailAndPassword(email, password);
             console.log('signed up user ', user);
             await createUserDocumentFromAuth(user, { displayName });
-            setCurrentUser(user);
-            console.log(UserContext);
             resetFormFields();
             alert('Successful sign up');
             // console.log('user doc ref ', userDocRef);
