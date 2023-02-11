@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 // as the actual value you want to access
 export const UserContext = createContext({
     currentUser: null,

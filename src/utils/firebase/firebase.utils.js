@@ -14,7 +14,8 @@ import {
     signInWithEmailAndPassword,
     GoogleAuthProvider,
     createUserWithEmailAndPassword,
-    signOut
+    signOut,
+    onAuthStateChanged
 } from 'firebase/auth';
 import {
     getFirestore,
@@ -45,7 +46,9 @@ googleProvider.setCustomParameters({
 export const auth = getAuth();
 console.log('auth ', auth);
 export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider);
-export const signInWithGoogleRedirect = () => signInWithRedirect(auth, googleProvider);
+export const signInWithGoogleRedirect = () => {
+    signInWithRedirect(auth, googleProvider);
+}
 export const db = getFirestore();
 // console.log('db ', db);
 export const createUserDocumentFromAuth = async (userAuth, additionalInfo = {}) => {
@@ -89,7 +92,7 @@ export const logInWithEmailAndPassword = async (email, password) => {
         return await signInWithEmailAndPassword(auth, email, password);
         // console.log('user credentials ', userCredentials);
     } catch (error) {
-        switch(error.code) {
+        switch (error.code) {
             case 'auth/user-not-found':
                 alert('Email not found!');
                 break;
@@ -103,3 +106,6 @@ export const logInWithEmailAndPassword = async (email, password) => {
 };
 
 export const signOutUser = async () => await signOut(auth);
+
+export const onAuthStateChangedListener = (callback) =>
+    onAuthStateChanged(auth, callback);

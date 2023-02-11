@@ -33,6 +33,7 @@ const SignInForm = () => {
             console.log(response);
             if (response) {
                 const userDocRef = createUserDocumentFromAuth(response.user);
+                setCurrentUser(response.user);
             }
             // ...
         }
@@ -40,6 +41,7 @@ const SignInForm = () => {
     }, []);
     const logGoogleUser = async () => {
         const { user } = await signInWithGooglePopup();
+        setCurrentUser(user);
         // console.log('logGoogleUser ', user);
         const userDocRef = createUserDocumentFromAuth(user);
         // console.log('userDocRef ', userDocRef);
