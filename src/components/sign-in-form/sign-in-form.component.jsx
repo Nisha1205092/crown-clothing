@@ -28,6 +28,7 @@ const SignInForm = () => {
             const response = await getRedirectResult(auth);
             console.log(response);
             if (response) {
+                // eslint-disable-next-line
                 const userDocRef = createUserDocumentFromAuth(response.user);
             }
             // ...

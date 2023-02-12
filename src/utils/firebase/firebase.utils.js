@@ -35,6 +35,8 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
+// following is to disable the warnings of unused variables 
+// eslint-disable-next-line
 const firebaseApp = initializeApp(firebaseConfig);
 // const analytics = getAnalytics(app);
 
