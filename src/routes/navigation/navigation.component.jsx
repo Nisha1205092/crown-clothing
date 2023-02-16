@@ -29,9 +29,9 @@ const Navigation = () => {
                                 SIGNIN
                             </Link>
                         )}
-                    <CartIcon />
+                    {/* <CartIcon /> */}
                 </div>
-                <CartDropdown />
+                {/* <CartDropdown /> */}
             </div>
             <Outlet />
         </Fragment>
