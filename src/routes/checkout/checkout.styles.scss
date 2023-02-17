@@ -1,0 +1,14 @@
+.checkout-page-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+    .checkout-items-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+
+        // .header {
+        // }
+    }
+}
