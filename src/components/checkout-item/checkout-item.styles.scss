@@ -1,0 +1,28 @@
+.checkout-item-container {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    align-items: center;
+
+    .image-item {
+        width: auto;
+        min-width: 30px;
+        height: 70px;
+    }
+
+    .up-arrow {
+        width: auto;
+        height: 20px;
+    }
+
+    .down-arrow {
+        width: auto;
+        height: 20px;
+    }
+
+    .cross {
+        width: auto;
+        height: 20px;
+    }
+
+}

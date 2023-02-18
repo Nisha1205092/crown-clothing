@@ -4,7 +4,7 @@ import { CartContext } from '../../contexts/cart.context';
 import { useContext } from 'react';
 
 const Checkout = () => {
-    const { cartItems } = useContext(CartContext);
+    const { cartItems, totalPrice } = useContext(CartContext);
     return (
         <div className='checkout-page-container'>
             <div className='checkout-items-container'>
@@ -29,6 +29,7 @@ const Checkout = () => {
                     <CheckoutItem key={item.id} cartItem={item} />
                 )
             }
+            <h3 className='total-price'>{`Total price: ${totalPrice}`}</h3>
             <footer>*Please use the following test credit card for payments*</footer>
         </div>
     );
