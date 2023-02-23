@@ -24,14 +24,14 @@ export const FormInputLabel = styled.label`
 export const Input = styled.input`
   background: none;
   background-color: white;
-  color: $sub-color;
+  color: ${subColor};
   font-size: 18px;
   padding: 10px 10px 10px 5px;
   display: block;
   width: 100%;
   border: none;
   border-radius: 0;
-  border-bottom: 1px solid $sub-color;
+  border-bottom: 1px solid ${subColor};
   margin: 25px 0;
 
   &:focus {
@@ -48,6 +48,6 @@ export const Group = styled.div`
   margin: 45px 0;
 
   input[type='password'] {
-  letter-spacing: 0.3em;
+    letter-spacing: 0.3em;
   }
 `;

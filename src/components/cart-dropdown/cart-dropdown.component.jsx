@@ -3,9 +3,8 @@ import {
     CartItems,
     EmptyMessage
 } from './cart-dropdown.styles';
-import '../button/button.styles.scss';
 import React from 'react';
-import Button from '../button/button.component';
+import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
 import CartItem from '../cart-item/cart-item.component';
 import { useContext } from 'react';
 import { CartContext } from '../../contexts/cart.context';
@@ -27,7 +26,7 @@ const CartDropdown = () => {
                 }
             </CartItems>
             <Button
-                className='button-container checkout-button'
+                buttonType={BUTTON_TYPE_CLASSES.base}
                 onClick={goToCheckoutHandler}>
                 Go to Checkout
             </Button>

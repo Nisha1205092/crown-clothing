@@ -17,7 +17,7 @@ import {
     RedirectButton,
     SignInButtonsContainer 
 } from './sign-in-form.styles';
-import Button from '../button/button.component';
+import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
 
 const defaultFormFields = {
     email: '',
@@ -33,7 +33,7 @@ const SignInForm = () => {
             const response = await getRedirectResult(auth);
             console.log(response);
             if (response) {
-                const userDocRef = createUserDocumentFromAuth(response.user);
+                createUserDocumentFromAuth(response.user);
             }
             // ...
         }
@@ -98,12 +98,12 @@ const SignInForm = () => {
                 <RedirectContainer>
                     <SignInButtonsContainer>
                         <Button type="submit">Sign In</Button>
-                        <Button type="button" onClick={logGoogleUser} buttonType={'google'}>
+                        <Button type="button" onClick={logGoogleUser} buttonType={BUTTON_TYPE_CLASSES.google}>
                             Google Sign In
                         </Button>
                     </SignInButtonsContainer>
                     <RedirectButton>
-                        <Button type="button" onClick={signInWithGoogleRedirect} buttonType={'redir'}>
+                        <Button type="button" onClick={signInWithGoogleRedirect} buttonType={BUTTON_TYPE_CLASSES.redir}>
                             Google Redirect
                         </Button>
                     </RedirectButton>
