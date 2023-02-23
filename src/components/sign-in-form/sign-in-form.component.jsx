@@ -11,7 +11,12 @@ import {
     createUserDocumentFromAuth
 } from "../../utils/firebase/firebase.utils";
 import FormInput from '../form-input/form-input.component';
-import './sign-in-form.styles.scss';
+import { 
+    SignInFormContainer, 
+    RedirectContainer, 
+    RedirectButton,
+    SignInButtonsContainer 
+} from './sign-in-form.styles';
 import Button from '../button/button.component';
 
 const defaultFormFields = {
@@ -70,7 +75,7 @@ const SignInForm = () => {
 
 
     return (
-        <div className='sign-in-form-container'>
+        <SignInFormContainer>
             <h2>I already have an account</h2>
             <span>Sign in with your email and password</span>
             <form action="" onSubmit={handleSubmit}>
@@ -90,21 +95,21 @@ const SignInForm = () => {
                     name="password"
                     value={password}
                 />
-                <div className='redirect-container'>
-                    <div className='sign-in-buttons-container'>
+                <RedirectContainer>
+                    <SignInButtonsContainer>
                         <Button type="submit">Sign In</Button>
                         <Button type="button" onClick={logGoogleUser} buttonType={'google'}>
                             Google Sign In
                         </Button>
-                    </div>
-                    <div className='redirect-button'>
+                    </SignInButtonsContainer>
+                    <RedirectButton>
                         <Button type="button" onClick={signInWithGoogleRedirect} buttonType={'redir'}>
                             Google Redirect
                         </Button>
-                    </div>
-                </div>
+                    </RedirectButton>
+                </RedirectContainer>
             </form>
-        </div>
+        </SignInFormContainer>
 
     );
 }
