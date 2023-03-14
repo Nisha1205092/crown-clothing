@@ -8,21 +8,26 @@ import {
     Price,
     Remove
 } from './checkout-item.styles';
-import { CartContext } from '../../contexts/cart.context';
-import { useContext } from 'react';
+// import { CartContext } from '../../contexts/cart.context';
+// import { useContext } from 'react';
+import { decrementQuantity, incrementQuantity, removeCartItem } from '../../store/cart/cart.action';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectCartItems } from '../../store/cart/cart.selector';
 
 const CheckoutItem = ({ cartItem }) => {
+    const dispatch = useDispatch();
     const { name, price, imageUrl, quantity } = cartItem;
-    const { decrementQuantity, incrementQuantity, removeCartItem } = useContext(CartContext);
+    // const { decrementQuantity, incrementQuantity, removeCartItem } = useContext(CartContext);
+    const cartItems = useSelector(selectCartItems);
 
     const downArroHandler = () => {
-        decrementQuantity(cartItem);
+        dispatch(decrementQuantity(cartItem, cartItems));
     };
     const upArrowHandler = () => {
-        incrementQuantity(cartItem);
+        dispatch(incrementQuantity(cartItem, cartItems));
     };
     const crossHandler = () => {
-        removeCartItem(cartItem);
+        dispatch(removeCartItem(cartItem, cartItems));
     };
 
     return (
