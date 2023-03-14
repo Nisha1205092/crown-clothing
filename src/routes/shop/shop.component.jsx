@@ -8,15 +8,14 @@ import { useDispatch } from 'react-redux';
 
 const Shop = () => {
     const dispatch = useDispatch();
+    // eslint-disable-next-line
     useEffect(() => {
         // inside useEffect, create another 
         //function for calling async functions
         
         const getCategoriesMap = async () => {
             const categories = await getCatagoriesAndDocuments();
-            console.log('before dispatch from Shop');
             dispatch(setCategories(categories));
-            console.log('after dispatch from Shop');
         }
         getCategoriesMap();
     }, [])

@@ -53,7 +53,6 @@ export const signInWithGoogleRedirect = () => {
     signInWithRedirect(auth, googleProvider);
 }
 export const db = getFirestore();
-// console.log('db ', db);
 
 export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
     const collectionRef = collection(db, collectionKey);
@@ -65,11 +64,9 @@ export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => 
     });
 
     await batch.commit();
-    console.log('done');
 }
 
 export const getCatagoriesAndDocuments = async () => {
-    console.log('inside getCategoriesAndDocuments');
     const collectionRef = collection(db, 'categories');
     const q = query(collectionRef);
     const querySnapshot = await getDocs(q);
@@ -110,9 +107,7 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInfo = {}) 
         return;
     }
     const userDocRef = doc(db, 'userAuth', userAuth.uid);
-    console.log('userDocRef ', userDocRef);
     const userSnapshot = await getDoc(userDocRef);
-    console.log('userSnapShot ', userSnapshot);
 
     if (!userSnapshot.exists()) {
         const { displayName, email } = userAuth;
@@ -143,7 +138,6 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
 export const logInWithEmailAndPassword = async (email, password) => {
     try {
         return await signInWithEmailAndPassword(auth, email, password);
-        // console.log('user credentials ', userCredentials);
     } catch (error) {
         switch (error.code) {
             case 'auth/user-not-found':

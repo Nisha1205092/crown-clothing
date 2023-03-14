@@ -31,7 +31,6 @@ const SignInForm = () => {
         async function fetchData() {
             // You can await here
             const response = await getRedirectResult(auth);
-            console.log(response);
             if (response) {
                 createUserDocumentFromAuth(response.user);
             }
