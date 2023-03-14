@@ -1,8 +1,6 @@
 /*
 isCartOpen: true,
-totalPrice: 0,
-cartItems: [],
-cartItemCount: 0,
+cartItems: []
 */
 import { createSelector } from "reselect";
 
