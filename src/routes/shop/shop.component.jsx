@@ -8,7 +8,6 @@ import { useDispatch } from 'react-redux';
 
 const Shop = () => {
     const dispatch = useDispatch();
-    // eslint-disable-next-line
     useEffect(() => {
         // inside useEffect, create another 
         //function for calling async functions
