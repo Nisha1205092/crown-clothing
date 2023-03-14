@@ -1,21 +1,12 @@
 import { compose, legacy_createStore as createStore, applyMiddleware } from "redux";
 // import logger from "redux-logger";
 import { rootReducer } from "./root-reducer";
+import { loggerMiddleware } from "./middleware/logger";
 
-const loggerMiddleware = (store) => (next) => (action) => {
-    if(!action.type) {
-        return next(action);
-    }
-    console.log('type: ', action.type);
-    console.log('payload: ', action.payload);
-    console.log('current state: ', store.getState());
-
-    next(action);
-
-    console.log('next state: ', store.getState());
-}
-
-const middlewares = [loggerMiddleware];
+// we only want to use logger in development mode
+// as we don't want console.log()s in production mode
+// .filter will remove any false value from the final array
+const middlewares = [process.env.NODE_ENV === 'development' && loggerMiddleware].filter(Boolean);
 
 const composedEnhancers = compose(applyMiddleware(...middlewares))
 
