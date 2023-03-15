@@ -5,7 +5,7 @@ import {
     LogoContainer 
 } from './navigation.styles';
 import { Outlet } from 'react-router-dom';
-import { Fragment, useContext } from 'react';
+import { Fragment } from 'react';
 import { useSelector } from 'react-redux';
 import { ReactComponent as CrownLogo } from '../../assets/crown.svg';
 // import { UserContext } from '../../contexts/user.context';

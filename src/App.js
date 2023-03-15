@@ -24,7 +24,7 @@ const App = () => {
     });
 
     return unsubscribe;
-  }, [])
+  }, [dispatch]) // to avoid warning, netlify deploy fails due to this
 
   return (
     <Routes>

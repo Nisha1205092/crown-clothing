@@ -17,7 +17,7 @@ const Shop = () => {
             dispatch(setCategories(categories));
         }
         getCategoriesMap();
-    }, [])
+    }, [dispatch]) // to avoid warning, netlify deploy fails due to this
     return (
         <Routes>
             <Route index element={<CategoriesPreview />} />
