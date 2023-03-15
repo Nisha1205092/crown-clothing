@@ -16,9 +16,16 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
+// use loggerMiddleware in development mode. Or return empty array
 const middlewares = [process.env.NODE_ENV === 'development' && loggerMiddleware].filter(Boolean);
 
-const composedEnhancers = compose(applyMiddleware(...middlewares))
+// to enable Redux Devtool
+const composeEnhancer = (
+    process.env.NODE_ENV === 'development'
+    && window
+    && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+) || compose;
+const composedEnhancers = composeEnhancer(applyMiddleware(...middlewares))
 
 export const store = createStore(persistedReducer, undefined, composedEnhancers);
 
