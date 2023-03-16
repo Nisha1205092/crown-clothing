@@ -5,7 +5,7 @@ const selectCategoriesReducer = (state) => state.categories;
 export const selectCategories = createSelector(
     [selectCategoriesReducer],
     (categoriesSlice) => { 
-        console.log('categories: ', categoriesSlice.categories);
+        // console.log('typeof categories: ', categoriesSlice.categories);
         return categoriesSlice.categories
     }
 );
@@ -13,7 +13,7 @@ export const selectCategories = createSelector(
 export const selectCategoriesMap = createSelector(
     [selectCategories],
     (categories) => { 
-        console.log('typeof categories: ', typeof(categories));
+        // console.log('typeof categories: ', categories);
         return categories.reduce((acc, category) => {
             const { title, items } = category;
             acc[title.toLowerCase()] = items;

@@ -15,6 +15,7 @@ const Shop = () => {
         
         const getCategoriesMap = async () => {
             const categories = await getCategoriesAndDocuments();
+            // console.log('typeof categories: ', categories);
             dispatch(setCategories(categories));
         }
         getCategoriesMap();
