@@ -14,12 +14,12 @@ const CategoriesPreview = () => {
 
             {
                 isLoading ? <Spinner /> :
-                    (<div className='category-preview-container'>
-                        {Object.keys(categoriesMap).map(title => {
+                    (
+                        Object.keys(categoriesMap).map(title => {
                             const products = categoriesMap[title];
                             return <CategoryPreview key={title} title={title} products={products} />
-                        })}
-                    </div>)}
+                        })
+                    )}
         </Fragment>
     );
 };
