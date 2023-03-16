@@ -66,11 +66,13 @@ export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => 
     await batch.commit();
 }
 
-export const getCatagoriesAndDocuments = async () => {
+export const getCategoriesAndDocuments = async () => {
     const collectionRef = collection(db, 'categories');
     const q = query(collectionRef);
     const querySnapshot = await getDocs(q);
-    return querySnapshot.docs.map((doc) => doc.data());
+    const value = querySnapshot.docs.map((doc) => doc.data());
+    console.log('typeof(value)', typeof(value));
+    return value;
     // const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
     //     const { title, items } = docSnapshot.data();
     //     acc[title.toLowerCase()] = items;

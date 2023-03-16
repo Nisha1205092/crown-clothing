@@ -4,6 +4,7 @@ import { selectCategoriesMap } from '../../store/categories/category.selector';
 
 const CategoriesPreview = () => {
     const categoriesMap = useSelector(selectCategoriesMap);
+    console.log('inside CategoriesPreview');
     
     return (
         <div className='category-preview-container'>

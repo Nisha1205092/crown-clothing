@@ -4,6 +4,7 @@ import { rootReducer } from "./root-reducer";
 import { loggerMiddleware } from "./middleware/logger";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from 'redux-persist/lib/storage';
+import thunk from "redux-thunk";
 
 // we only want to use logger in development mode
 // as we don't want console.log()s in production mode
@@ -11,15 +12,18 @@ import storage from 'redux-persist/lib/storage';
 const persistConfig = {
     key: 'root',
     storage,
-    blacklist: ['user']
+    whitelist: ['cart']
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 // use loggerMiddleware in development mode. Or return empty array
-const middlewares = [process.env.NODE_ENV === 'development' && loggerMiddleware].filter(Boolean);
+const middlewares = [process.env.NODE_ENV === 'development'
+    && loggerMiddleware,
+    thunk
+].filter(Boolean);
 
-// to enable Redux Devtool
+// to enable Redux Devtool chrome extension 
 const composeEnhancer = (
     process.env.NODE_ENV === 'development'
     && window
