@@ -1,5 +1,3 @@
-import { CART_ACTION_TYPES } from "../../store/cart/cart.types";
-
 export const createAction = (type, payload) => ({ type, payload });
 
 export const addCartItem = (cartItems, productToAdd) => {

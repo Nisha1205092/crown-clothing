@@ -9,7 +9,7 @@ const Shop = () => {
     console.log('inside shop');
     useEffect(() => {
         dispatch(fetchCategoriesAsync());
-    }, [])
+    }, [dispatch]) // to avoid warning, that fails Netlify build
     return (
         <Routes>
             <Route index element={<CategoriesPreview />} />
