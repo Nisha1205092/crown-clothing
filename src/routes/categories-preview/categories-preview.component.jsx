@@ -7,8 +7,7 @@ import { Fragment } from 'react';
 const CategoriesPreview = () => {
     const categoriesMap = useSelector(selectCategoriesMap);
     const isLoading = useSelector(selectCategoriesIsLoading);
-    console.log('inside CategoriesPreview');
-
+    
     return (
         <Fragment>
 
