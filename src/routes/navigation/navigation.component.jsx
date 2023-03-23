@@ -1,8 +1,8 @@
-import { 
-    NavigationContainer, 
-    NavLinksContainer, 
-    NavLink, 
-    LogoContainer 
+import {
+    NavigationContainer,
+    NavLinksContainer,
+    NavLink,
+    LogoContainer
 } from './navigation.styles';
 import { Outlet } from 'react-router-dom';
 import { Fragment } from 'react';
@@ -31,12 +31,19 @@ const Navigation = () => {
                     </NavLink>
                     {
                         currentUser ?
-                            (<NavLink to='/auth' className='nav-link' onClick={signOutHandler}>SIGN OUT</NavLink>)
+                            (
+                                <NavLink                                    
+                                    className='nav-link'
+                                    onClick={signOutHandler}
+                                >
+                                    SIGN OUT
+                                </NavLink>
+                            )
                             : (<NavLink to='/auth'>SIGNIN</NavLink>)
                     }
                     <CartIcon />
                 </NavLinksContainer>
-                { isCartOpen && <CartDropdown />}
+                {isCartOpen && <CartDropdown />}
                 <Outlet />
             </NavigationContainer>
         </Fragment>
