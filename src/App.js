@@ -15,7 +15,7 @@ const App = () => {
     dispatch(checkUserSession())
   }, [])
 
-  return (
+  return ( 
     <Routes>
       <Route path="/" element={<Navigation />} >
         <Route index element={<Home />} />

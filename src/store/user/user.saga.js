@@ -6,7 +6,7 @@ import { getCurrentUser, createUserDocumentFromAuth } from "../../utils/firebase
 export function* getSnapshotFromUserAuth(userAuth, additionalInfo) {
     try {
         const userSnapshot = yield call(createUserDocumentFromAuth, userAuth, additionalInfo);
-        console.log(userSnapshot, userSnapshot.data());
+        console.log('userSnapshot: ', userSnapshot, 'userSnapshot.data: ', userSnapshot.data());
         yield put(signInSucess({ id: userSnapshot.id, ...userSnapshot.data()}));
     } catch (error) {
         yield put(signInFailed(error));        
