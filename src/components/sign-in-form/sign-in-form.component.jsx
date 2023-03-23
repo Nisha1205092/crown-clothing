@@ -5,9 +5,7 @@ import {
 import { getRedirectResult } from 'firebase/auth';
 import {
     auth,
-    signInWithGooglePopup,
     signInWithGoogleRedirect,
-    logInWithEmailAndPassword,
     createUserDocumentFromAuth
 } from "../../utils/firebase/firebase.utils";
 import FormInput from '../form-input/form-input.component';
@@ -19,7 +17,7 @@ import {
 } from './sign-in-form.styles';
 import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
 import { useDispatch } from 'react-redux';
-import { checkUserSession, googleSignInStart } from '../../store/user/user.action';
+import { emailSignInStart, googleSignInStart } from '../../store/user/user.action';
 
 const defaultFormFields = {
     email: '',
@@ -41,7 +39,7 @@ const SignInForm = () => {
         }
         fetchData();
     }, []);
-    const logGoogleUser = async () => {
+    const signInWithGoogle = async () => {
         dispatch(googleSignInStart());
         // await signInWithGooglePopup();
 
@@ -58,26 +56,12 @@ const SignInForm = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
-        try {
-            // console.log('email received ', email);
-            // console.log('password received ', password);
-            const { user } = await logInWithEmailAndPassword(email, password);
-            console.log('user signing in ', user);
-            resetFormFields();
-            alert('Sign in successful');
-            dispatch(checkUserSession()); 
-            // store it inside the UserContext
-        } catch (error) {
-            console.log('error signing in user');
-        }
-
+        console.log('email: ', email);
+        console.log('password: ', password);
+        dispatch(emailSignInStart(email, password));
+        resetFormFields();
     }
-    // createAuthUserWithEmailAndPassword
-    //create a userdoc with what that returns
-
-
-
+    
     return (
         <SignInFormContainer>
             <h2>I already have an account</h2>
@@ -102,7 +86,7 @@ const SignInForm = () => {
                 <RedirectContainer>
                     <SignInButtonsContainer>
                         <Button type="submit">Sign In</Button>
-                        <Button type="button" onClick={logGoogleUser} buttonType={BUTTON_TYPE_CLASSES.google}>
+                        <Button type="button" onClick={signInWithGoogle} buttonType={BUTTON_TYPE_CLASSES.google}>
                             Google Sign In
                         </Button>
                     </SignInButtonsContainer>
