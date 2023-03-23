@@ -10,16 +10,3 @@ export const fetchCategoriesSuccess = (categories) =>
 export const fetchCategoriesFailed = (error) =>
     createAction(CATEGORY_ACTION_TYPE.FETCH_CATEGORIES_FAILED, error);
 
-// // redux-thunk
-// export const fetchCategoriesAsync = () => async (dispatch) => {
-//     dispatch(fetchCategoriesStart());
-
-//     try {
-//         const categoriesArray = await getCategoriesAndDocuments(); // async
-//         console.log('typeof categoriesArray: ', categoriesArray);
-//         dispatch(fetchCategoriesSuccess(categoriesArray));
-//     } catch (error) {
-//         dispatch(fetchCategoriesFailed(error));
-//     }
-// };
-

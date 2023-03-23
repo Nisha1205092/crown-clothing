@@ -2,10 +2,9 @@ import {
     useEffect,
     useState
 } from 'react';
-import { getRedirectResult } from 'firebase/auth';
+// import { getRedirectResult } from 'firebase/auth';
 import {
     auth,
-    signInWithGoogleRedirect,
     createUserDocumentFromAuth
 } from "../../utils/firebase/firebase.utils";
 import FormInput from '../form-input/form-input.component';
@@ -17,7 +16,12 @@ import {
 } from './sign-in-form.styles';
 import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
 import { useDispatch } from 'react-redux';
-import { emailSignInStart, googleSignInStart } from '../../store/user/user.action';
+import { 
+    checkUserSession,
+    emailSignInStart, 
+    googleRedirectSignInStart, 
+    googleSignInStart 
+} from '../../store/user/user.action';
 
 const defaultFormFields = {
     email: '',
@@ -28,22 +32,24 @@ const SignInForm = () => {
     const { email, password } = formFields;
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        async function fetchData() {
-            // You can await here
-            const response = await getRedirectResult(auth);
-            if (response) {
-                createUserDocumentFromAuth(response.user);
-            }
-            // ...
-        }
-        fetchData();
-    }, []);
-    const signInWithGoogle = async () => {
+    // useEffect(() => {
+    //     async function fetchData() {
+    //         // You can await here
+    //         const response = await getRedirectResult(auth);
+    //         if (response) {
+    //             dispatch(checkUserSession())
+    //         }
+    //         // ...
+    //     }
+    //     fetchData();
+    // }, []);
+    const signInWithGoogleHandler = () => {
         dispatch(googleSignInStart());
-        // await signInWithGooglePopup();
-
     };
+
+    const signInWithGoogleRedirectHandler = () => {
+        dispatch(googleRedirectSignInStart());
+    }
 
     const resetFormFields = () => {
         setFormFields(defaultFormFields);
@@ -54,7 +60,7 @@ const SignInForm = () => {
         setFormFields({ ...formFields, [name]: value });
     };
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault();
         console.log('email: ', email);
         console.log('password: ', password);
@@ -86,12 +92,12 @@ const SignInForm = () => {
                 <RedirectContainer>
                     <SignInButtonsContainer>
                         <Button type="submit">Sign In</Button>
-                        <Button type="button" onClick={signInWithGoogle} buttonType={BUTTON_TYPE_CLASSES.google}>
+                        <Button type="button" onClick={signInWithGoogleHandler} buttonType={BUTTON_TYPE_CLASSES.google}>
                             Google Sign In
                         </Button>
                     </SignInButtonsContainer>
                     <RedirectButton>
-                        <Button type="button" onClick={signInWithGoogleRedirect} buttonType={BUTTON_TYPE_CLASSES.redir}>
+                        <Button type="button" onClick={signInWithGoogleRedirectHandler} buttonType={BUTTON_TYPE_CLASSES.redir}>
                             Google Redirect
                         </Button>
                     </RedirectButton>

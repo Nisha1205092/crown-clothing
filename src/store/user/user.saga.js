@@ -1,5 +1,6 @@
 import { takeLatest, put, call, all } from "redux-saga/effects";
 import { USER_ACTION_TYPE } from "./user.types";
+import { getRedirectResult } from 'firebase/auth';
 import {
     signInSucess,
     signInFailed,
@@ -8,11 +9,13 @@ import {
     signOutSuccess
 } from "./user.action";
 import {
+    auth,
     signOutUser,
     getCurrentUser,
     createUserDocumentFromAuth,
     signInWithGooglePopup,
-    logInWithEmailAndPassword
+    logInWithEmailAndPassword,
+    signInWithGoogleRedirect
 } from "../../utils/firebase/firebase.utils";
 
 export function* getSnapshotFromUserAuth(userAuth, additionalInfo) {
@@ -40,6 +43,19 @@ export function* signInWithGoogle() {
         const { user } = yield call(signInWithGooglePopup);
         console.log('sign in with google', user);
         yield put(checkUserSession());
+    } catch (error) {
+        yield put(signInFailed(error));
+    }
+}
+
+export function* signInWithGoogleRedirectSaga() {
+    try {
+        yield call(signInWithGoogleRedirect);
+        const response = yield call(getRedirectResult(auth));
+        if (response) {
+            console.log(response.user);
+            yield call(getSnapshotFromUserAuth, response.user);
+        }
     } catch (error) {
         yield put(signInFailed(error));
     }
@@ -75,6 +91,10 @@ export function* signInWithGoogleStart() {
     yield takeLatest(USER_ACTION_TYPE.GOOGLE_SIGN_IN_START, signInWithGoogle)
 }
 
+export function* signInWithGoogleRedirectStart() {
+    yield takeLatest(USER_ACTION_TYPE.GOOGLE_REDIRECT_SIGN_IN_START, signInWithGoogleRedirectSaga)
+}
+
 export function* signInWithEmailStart() {
     yield takeLatest(USER_ACTION_TYPE.EMAIL_SIGN_IN_START, signInWithEmail)
 }
@@ -88,7 +108,8 @@ export function* userSagas() {
         [
             call(onCheckUserSession),
             call(signInWithGoogleStart),
+            call(signInWithEmailStart),
+            call(signInWithGoogleRedirectStart),
             call(onSignOut),
-            call(signInWithEmailStart)
         ]));
 }
