@@ -49,9 +49,8 @@ googleProvider.setCustomParameters({
 
 export const auth = getAuth();
 export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider);
-export const signInWithGoogleRedirect = () => {
-    signInWithRedirect(auth, googleProvider);
-}
+export const signInWithGoogleRedirect = () => signInWithRedirect(auth, googleProvider);
+
 export const db = getFirestore();
 
 export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
@@ -118,7 +117,7 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInfo = {}) 
                 displayName,
                 email,
                 createdAt,
-                ...additionalInfo
+                ...additionalInfo // in case of sign ups
             });
             console.log('creating user account!!');
         } catch (error) {
@@ -154,6 +153,7 @@ export const logInWithEmailAndPassword = async (email, password) => {
 
 export const signOutUser = async () => await signOut(auth);
 
+
 export const onAuthStateChangedListener = (callback) =>
     onAuthStateChanged(auth, callback);
 
@@ -162,7 +162,7 @@ export const getCurrentUser = () => {
         const unsubscribe = onAuthStateChanged(
             auth,
             (userAuth) => {
-                unsubscribe();
+                unsubscribe(); // we want to close the listener to avoid memory leaks
                 resolve(userAuth);
             },
             reject //deprecated third arg

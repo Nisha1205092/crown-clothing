@@ -18,6 +18,8 @@ import {
     SignInButtonsContainer 
 } from './sign-in-form.styles';
 import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
+import { useDispatch } from 'react-redux';
+import { checkUserSession, googleSignInStart } from '../../store/user/user.action';
 
 const defaultFormFields = {
     email: '',
@@ -26,6 +28,7 @@ const defaultFormFields = {
 const SignInForm = () => {
     const [formFields, setFormFields] = useState(defaultFormFields);
     const { email, password } = formFields;
+    const dispatch = useDispatch();
 
     useEffect(() => {
         async function fetchData() {
@@ -39,7 +42,8 @@ const SignInForm = () => {
         fetchData();
     }, []);
     const logGoogleUser = async () => {
-        await signInWithGooglePopup();
+        dispatch(googleSignInStart());
+        // await signInWithGooglePopup();
 
     };
 
@@ -62,6 +66,7 @@ const SignInForm = () => {
             console.log('user signing in ', user);
             resetFormFields();
             alert('Sign in successful');
+            dispatch(checkUserSession()); 
             // store it inside the UserContext
         } catch (error) {
             console.log('error signing in user');
