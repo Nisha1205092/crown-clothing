@@ -44,8 +44,6 @@ const SignInForm = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log('email: ', email);
-        console.log('password: ', password);
         dispatch(emailSignInStart(email, password));
         resetFormFields();
     }
