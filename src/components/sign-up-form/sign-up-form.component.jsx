@@ -1,11 +1,9 @@
 import Button from "../button/button.component";
 import { SignUpFormContainer } from "./sign-up-form.styles.jsx";
 import { useState } from "react";
-import { 
-    createAuthUserWithEmailAndPassword, 
-    createUserDocumentFromAuth 
-} from "../../utils/firebase/firebase.utils";
 import FormInput from "../form-input/form-input.component";
+import { useDispatch } from "react-redux";
+import { signUpStart } from "../../store/user/user.action";
 
 const defaultFormFields = {
     displayName: '',
@@ -17,6 +15,7 @@ const defaultFormFields = {
 const SignUpForm = () => {
     const [formFields, setFormFields] = useState(defaultFormFields);
     const { displayName, email, password, confirmPassword } = formFields;
+    const dispatch = useDispatch();
 
     const resetFormFields = () => {
         setFormFields(defaultFormFields);
@@ -34,21 +33,22 @@ const SignUpForm = () => {
             alert("passwords do not match");
             return;
         }
-        try {
-            const { user } = await createAuthUserWithEmailAndPassword(email, password);
-            await createUserDocumentFromAuth(user, { displayName });
-            resetFormFields();
-            alert('Successful sign up');
-        } catch(error) {
-            if (error.code === 'auth/email-already-in-use') {
-                alert('email already exists');
-            } else if(error.code === 'auth/weak-password') {
-                alert('weak password');
-            } else {
-                console.log('error creating user', error.code);
-            }
+        dispatch(signUpStart(email, password, displayName));
+        resetFormFields();
+        // try {
+        //     const { user } = await createAuthUserWithEmailAndPassword(email, password);
+        //     await createUserDocumentFromAuth(user, { displayName });
+        //     alert('Successful sign up');
+        // } catch(error) {
+        //     if (error.code === 'auth/email-already-in-use') {
+        //         alert('email already exists');
+        //     } else if(error.code === 'auth/weak-password') {
+        //         alert('weak password');
+        //     } else {
+        //         console.log('error creating user', error.code);
+        //     }
             
-        }
+        // }
         // createAuthUserWithEmailAndPassword
         //create a userdoc with what that returns
     }

@@ -6,7 +6,8 @@ import {
     signInFailed,
     checkUserSession,
     signOutFailed,
-    signOutSuccess
+    signOutSuccess,
+    signUpFailed
 } from "./user.action";
 import {
     auth,
@@ -15,7 +16,8 @@ import {
     createUserDocumentFromAuth,
     signInWithGooglePopup,
     logInWithEmailAndPassword,
-    signInWithGoogleRedirect
+    signInWithGoogleRedirect,
+    createAuthUserWithEmailAndPassword
 } from "../../utils/firebase/firebase.utils";
 
 export function* getSnapshotFromUserAuth(userAuth, additionalInfo) {
@@ -83,6 +85,23 @@ export function* signOut() {
     }
 }
 
+export function* signUpWithEmail({ payload: { email, password, displayName } }) {
+    try {
+        const { user } = yield call(createAuthUserWithEmailAndPassword, email, password);
+        yield call(createUserDocumentFromAuth, user, { displayName });
+        yield put(checkUserSession())
+    } catch(error) {
+        if (error.code === 'auth/email-already-in-use') {
+            console.log('email already exists');
+        } else if(error.code === 'auth/weak-password') {
+            console.log('weak password');
+        } else {
+            console.log('error creating user', error.code);
+        }   
+        yield put(signUpFailed());
+    }
+}
+
 export function* onCheckUserSession() {
     yield takeLatest(USER_ACTION_TYPE.CHECK_USER_SESSION, isUserAuthenticated)
 }
@@ -99,6 +118,10 @@ export function* signInWithEmailStart() {
     yield takeLatest(USER_ACTION_TYPE.EMAIL_SIGN_IN_START, signInWithEmail)
 }
 
+export function* signUpStart() {
+    yield takeLatest(USER_ACTION_TYPE.SIGN_UP_START, signUpWithEmail)
+}
+
 export function* onSignOut() {
     yield takeLatest(USER_ACTION_TYPE.SIGN_OUT_START, signOut)
 }
@@ -110,6 +133,7 @@ export function* userSagas() {
             call(signInWithGoogleStart),
             call(signInWithEmailStart),
             call(signInWithGoogleRedirectStart),
+            call(signUpStart),
             call(onSignOut),
         ]));
 }

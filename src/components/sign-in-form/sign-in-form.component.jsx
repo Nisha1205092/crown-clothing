@@ -1,12 +1,6 @@
 import {
-    useEffect,
     useState
 } from 'react';
-// import { getRedirectResult } from 'firebase/auth';
-import {
-    auth,
-    createUserDocumentFromAuth
-} from "../../utils/firebase/firebase.utils";
 import FormInput from '../form-input/form-input.component';
 import { 
     SignInFormContainer, 
@@ -17,7 +11,6 @@ import {
 import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
 import { useDispatch } from 'react-redux';
 import { 
-    checkUserSession,
     emailSignInStart, 
     googleRedirectSignInStart, 
     googleSignInStart 
@@ -32,24 +25,13 @@ const SignInForm = () => {
     const { email, password } = formFields;
     const dispatch = useDispatch();
 
-    // useEffect(() => {
-    //     async function fetchData() {
-    //         // You can await here
-    //         const response = await getRedirectResult(auth);
-    //         if (response) {
-    //             dispatch(checkUserSession())
-    //         }
-    //         // ...
-    //     }
-    //     fetchData();
-    // }, []);
     const signInWithGoogleHandler = () => {
         dispatch(googleSignInStart());
     };
 
     const signInWithGoogleRedirectHandler = () => {
         dispatch(googleRedirectSignInStart());
-    }
+    };
 
     const resetFormFields = () => {
         setFormFields(defaultFormFields);
