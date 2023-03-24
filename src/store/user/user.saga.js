@@ -67,7 +67,7 @@ export function* signInWithEmail({ payload: { email, password } }) {
     try {
         const { user } = yield call(logInWithEmailAndPassword, email, password);
         console.log('user signing in ', user);
-        yield put(checkUserSession());
+        yield call(getSnapshotFromUserAuth, user);
         // store it inside the UserContext
     } catch (error) {
         yield put(signInFailed(error));
