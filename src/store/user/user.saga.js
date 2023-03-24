@@ -4,7 +4,6 @@ import { getRedirectResult } from 'firebase/auth';
 import {
     signInSucess,
     signInFailed,
-    checkUserSession,
     signOutFailed,
     signOutSuccess,
     signUpFailed,
