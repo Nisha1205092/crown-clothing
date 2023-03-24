@@ -33,24 +33,19 @@ const SignUpForm = () => {
             alert("passwords do not match");
             return;
         }
-        dispatch(signUpStart(email, password, displayName));
-        resetFormFields();
-        // try {
-        //     const { user } = await createAuthUserWithEmailAndPassword(email, password);
-        //     await createUserDocumentFromAuth(user, { displayName });
-        //     alert('Successful sign up');
-        // } catch(error) {
-        //     if (error.code === 'auth/email-already-in-use') {
-        //         alert('email already exists');
-        //     } else if(error.code === 'auth/weak-password') {
-        //         alert('weak password');
-        //     } else {
-        //         console.log('error creating user', error.code);
-        //     }
-            
-        // }
-        // createAuthUserWithEmailAndPassword
-        //create a userdoc with what that returns
+
+        try {
+            dispatch(signUpStart(email, password, displayName));
+            resetFormFields();
+        } catch (error) {
+            if (error.code === 'auth/email-already-in-use') {
+                alert('email already exists');
+            } else if (error.code === 'auth/weak-password') {
+                alert('weak password');
+            } else {
+                console.log('error creating user', error.code);
+            }
+        }
     }
     return (
         <SignUpFormContainer>

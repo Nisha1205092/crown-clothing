@@ -7,7 +7,8 @@ import {
     checkUserSession,
     signOutFailed,
     signOutSuccess,
-    signUpFailed
+    signUpFailed,
+    signUpSucess
 } from "./user.action";
 import {
     auth,
@@ -85,20 +86,16 @@ export function* signOut() {
     }
 }
 
+export function* signInAfterSignUp({ payload: { user, additionalDetails } }) {
+    yield call(getSnapshotFromUserAuth, user, additionalDetails);
+}
+
 export function* signUpWithEmail({ payload: { email, password, displayName } }) {
     try {
         const { user } = yield call(createAuthUserWithEmailAndPassword, email, password);
-        yield call(createUserDocumentFromAuth, user, { displayName });
-        yield put(checkUserSession())
+        yield put(signUpSucess(user, { displayName }));
     } catch(error) {
-        if (error.code === 'auth/email-already-in-use') {
-            console.log('email already exists');
-        } else if(error.code === 'auth/weak-password') {
-            console.log('weak password');
-        } else {
-            console.log('error creating user', error.code);
-        }   
-        yield put(signUpFailed());
+        yield put(signUpFailed(error));
     }
 }
 
@@ -106,19 +103,19 @@ export function* onCheckUserSession() {
     yield takeLatest(USER_ACTION_TYPE.CHECK_USER_SESSION, isUserAuthenticated)
 }
 
-export function* signInWithGoogleStart() {
+export function* onSignInWithGoogleStart() {
     yield takeLatest(USER_ACTION_TYPE.GOOGLE_SIGN_IN_START, signInWithGoogle)
 }
 
-export function* signInWithGoogleRedirectStart() {
+export function* onSignInWithGoogleRedirectStart() {
     yield takeLatest(USER_ACTION_TYPE.GOOGLE_REDIRECT_SIGN_IN_START, signInWithGoogleRedirectSaga)
 }
 
-export function* signInWithEmailStart() {
+export function* onSignInWithEmailStart() {
     yield takeLatest(USER_ACTION_TYPE.EMAIL_SIGN_IN_START, signInWithEmail)
 }
 
-export function* signUpStart() {
+export function* onSignUpStart() {
     yield takeLatest(USER_ACTION_TYPE.SIGN_UP_START, signUpWithEmail)
 }
 
@@ -126,14 +123,19 @@ export function* onSignOut() {
     yield takeLatest(USER_ACTION_TYPE.SIGN_OUT_START, signOut)
 }
 
+export function* onSignUpSuccess() {
+    yield takeLatest(USER_ACTION_TYPE.SIGN_UP_SUCCESS, signInAfterSignUp)
+}
+
 export function* userSagas() {
     yield (all(
         [
             call(onCheckUserSession),
-            call(signInWithGoogleStart),
-            call(signInWithEmailStart),
-            call(signInWithGoogleRedirectStart),
-            call(signUpStart),
+            call(onSignInWithGoogleStart),
+            call(onSignInWithEmailStart),
+            call(onSignInWithGoogleRedirectStart),
+            call(onSignUpStart),
+            call(onSignUpSuccess),
             call(onSignOut),
         ]));
 }
