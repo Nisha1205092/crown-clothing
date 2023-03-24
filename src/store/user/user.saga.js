@@ -44,7 +44,7 @@ export function* signInWithGoogle() {
     try {
         const { user } = yield call(signInWithGooglePopup);
         console.log('sign in with google', user);
-        yield put(checkUserSession());
+        yield call(getSnapshotFromUserAuth, user);
     } catch (error) {
         yield put(signInFailed(error));
     }
