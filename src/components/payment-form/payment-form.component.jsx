@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../../store/user/user.selector';
 import { selectTotalPrice } from '../../store/cart/cart.selector';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
-import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
+import { BUTTON_TYPE_CLASSES } from '../button/button.component';
 import { FormContainer, PaymentFormContainer, PaymentButton } from './payment-form.styles';
 
 const PaymentForm = () => {
