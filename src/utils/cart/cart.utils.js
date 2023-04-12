@@ -1,5 +1,3 @@
-export const createAction = (type, payload) => ({ type, payload });
-
 export const addCartItem = (cartItems, productToAdd) => {
     // find if cartItems contains productToAdd
     const existingCartItem = cartItems.find(
@@ -32,14 +30,3 @@ export const decCartItemQuantity = (cartItems, productToDec) => {
 
 export const delItem = (cartItems, productToRem) => cartItems.filter((item) => item.id !== productToRem.id);
 
-// export const updateCartItemsReducer = (newCartItems) => {
-//     const newCartCount = newCartItems.reduce((total, item) => total + item.quantity, 0);
-//     const newTotalPrice = newCartItems.reduce((total, item) => total + item.quantity * item.price, 0);
-
-//     const payload = {
-//         cartItems: newCartItems,
-//         cartItemCount: newCartCount,
-//         totalPrice: newTotalPrice
-//     }
-//     return createAction(CART_ACTION_TYPES.SET_CART_ITEMS, payload);
-// }

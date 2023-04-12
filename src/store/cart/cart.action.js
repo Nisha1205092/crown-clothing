@@ -4,7 +4,7 @@ import {
     incCartItemQuantity, 
     decCartItemQuantity, 
     delItem,
-} from "../../utils/reducers/reducers.utils";
+} from "../../utils/cart/cart.utils";
 import { CART_ACTION_TYPES } from "./cart.types";
 
 export const addItemToCart = (productToAdd, cartItems) => {
