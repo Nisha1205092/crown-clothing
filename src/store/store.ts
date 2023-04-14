@@ -8,6 +8,7 @@ import storage from 'redux-persist/lib/storage';
 import createSagaMiddleware from "@redux-saga/core";
 import { rootSaga } from "./root-saga";
 
+export type RootState = ReturnType<typeof rootReducer>;
 // we only want to use logger in development mode
 // as we don't want console.log()s in production mode
 // .filter will remove any false value from the final array
