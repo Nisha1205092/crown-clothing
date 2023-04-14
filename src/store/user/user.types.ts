@@ -14,14 +14,14 @@ export enum USER_ACTION_TYPE {
     SIGN_UP_START = 'user/SIGN_UP_START'
 };
 
-export type User = {
-    displayName?: string;
-    email: string;
-    createdAt?: Date;
-    password?: string;
-}
+// export type User = {
+//     displayName?: string;
+//     email: string;
+//     createdAt?: Date;
+//     password?: string;
+// }
 
-export type signUpSuccessPayload = {
-    user: User;
-    additionalDetails: string; 
-}
+// export type signUpSuccessPayload = {
+//     user: User;
+//     additionalDetails: string; 
+// }

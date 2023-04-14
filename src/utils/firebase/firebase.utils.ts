@@ -5,8 +5,9 @@
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-
-import { initializeApp } from "firebase/app";
+import { Category } from "../../store/categories/category.types";
+import { Auth, NextOrObserver, User } from "firebase/auth";
+import { initializeApp, FirebaseError } from "firebase/app";
 import {
     getAuth,
     signInWithPopup,
@@ -25,9 +26,10 @@ import {
     collection, 
     writeBatch,
     getDocs,
-    query
+    query,
+    QuerySnapshot,
+    QueryDocumentSnapshot
 } from 'firebase/firestore';
-
 const firebaseConfig = {
     apiKey: "AIzaSyCFzjDEBfof0wUkkua0weBqGYIt_0zcV58",
     authDomain: "crown-clothing-db-ab56b.firebaseapp.com",
@@ -52,8 +54,15 @@ export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider)
 export const signInWithGoogleRedirect = () => signInWithRedirect(auth, googleProvider);
 
 export const db = getFirestore();
-
-export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+ 
+export type ObjectToAdd = {
+    title: string;
+}
+// for populating firebase database with categories and products initially, unused now
+export const addCollectionAndDocuments = async <T extends ObjectToAdd>(
+    collectionKey: string, 
+    objectsToAdd: T[]
+    ): Promise<void> => {
     const collectionRef = collection(db, collectionKey);
     const batch = writeBatch(db);
     
@@ -65,11 +74,11 @@ export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => 
     await batch.commit();
 }
 
-export const getCategoriesAndDocuments = async () => {
+export const getCategoriesAndDocuments = async (): Promise<Category[]> => {
     const collectionRef = collection(db, 'categories');
     const q = query(collectionRef);
     const querySnapshot = await getDocs(q);
-    return querySnapshot.docs.map((doc) => doc.data());
+    return querySnapshot.docs.map((doc) => doc.data() as Category);
     // const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
     //     const { title, items } = docSnapshot.data();
     //     acc[title.toLowerCase()] = items;
@@ -100,7 +109,20 @@ export const getCategoriesAndDocuments = async () => {
     
 }
 
-export const createUserDocumentFromAuth = async (userAuth, additionalInfo = {}) => {
+export type AdditionalInfo = {
+    displayName?: string;
+};
+
+export type UserData = {
+    createdAt: Date;
+    displayName: string;
+    email: string;
+}
+
+export const createUserDocumentFromAuth = async (
+    userAuth: User, 
+    additionalInfo = {} as AdditionalInfo
+    ): Promise<void | QueryDocumentSnapshot<UserData> > => {
     if (!userAuth) {
         console.log('userAuth does not exist!');
         return;
@@ -121,42 +143,50 @@ export const createUserDocumentFromAuth = async (userAuth, additionalInfo = {}) 
             });
             console.log('creating user account!!');
         } catch (error) {
-            console.log('error creating the user ', error.message);
+            console.log('error creating the user ', error);
         }
     }
-    return userSnapshot;
+    return userSnapshot as QueryDocumentSnapshot<UserData>;
 }
 
-export const createAuthUserWithEmailAndPassword = async (email, password) => {
+export const createAuthUserWithEmailAndPassword = async (email: string, password: string) => {
     if (!email || !password) {
         return;
     }
     return await createUserWithEmailAndPassword(auth, email, password);
 }
 
-export const logInWithEmailAndPassword = async (email, password) => {
-    try {
-        return await signInWithEmailAndPassword(auth, email, password);
-    } catch (error) {
-        switch (error.code) {
-            case 'auth/user-not-found':
-                alert('Email not found!');
-                break;
-            case 'auth/wrong-password':
-                alert('Password does not match!');
-                break;
-            default:
-                console.log(error.message);
-        }
+///////////////////////////////////
+// help from ChatGPT
+interface FirebaseAuthError extends FirebaseError {
+  code: string;
+  message: string;
+}
+// Function to handle login with email and password
+export const logInWithEmailAndPassword = async (email: string, password: string) => {
+  try {
+    return await signInWithEmailAndPassword(auth, email, password);
+  } catch (error) {
+    const firebaseError = error as FirebaseAuthError;
+    switch (firebaseError.code) {
+      case 'auth/user-not-found':
+        alert('Email not found!');
+        break;
+      case 'auth/wrong-password':
+        alert('Password does not match!');
+        break;
+      default:
+        console.log(firebaseError.message);
     }
+  }
 };
 
 export const signOutUser = async () => await signOut(auth);
 
-export const onAuthStateChangedListener = (callback) =>
+export const onAuthStateChangedListener = (callback: NextOrObserver<User>) =>
     onAuthStateChanged(auth, callback);
 
-export const getCurrentUser = () => {
+export const getCurrentUser = (): Promise<User | null> => {
     return new Promise((resolve, reject) => {
         const unsubscribe = onAuthStateChanged(
             auth,

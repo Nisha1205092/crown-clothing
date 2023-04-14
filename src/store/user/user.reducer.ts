@@ -1,9 +1,20 @@
 import { AnyAction } from "redux";
-import { USER_ACTION_TYPE, User } from "./user.types";
-import { emailSignInStart, googleRedirectSignInStart, googleSignInStart, signInFailed, signInSucess, signOutFailed, signOutStart, signOutSuccess, signUpFailed, signUpStart } from "./user.action";
+import {
+    emailSignInStart,
+    googleRedirectSignInStart,
+    googleSignInStart,
+    signInFailed,
+    signInSucess,
+    signOutFailed,
+    signOutStart,
+    signOutSuccess,
+    signUpFailed,
+    signUpStart
+} from "./user.action";
+import { UserData } from "../../utils/firebase/firebase.utils";
 
 export type UserState = {
-    readonly currentUser: User | null;
+    readonly currentUser: UserData | null;
     readonly isLoading: boolean;
     readonly error: Error | null;
 }
@@ -15,8 +26,6 @@ const INITIAL_STATE: UserState = {
 };
 
 export const userReducer = (state = INITIAL_STATE, action = {} as AnyAction) => {
-    // const { type, payload } = action;
-
     if (signInSucess.match(action)) {
         return { ...state, currentUser: action.payload, isLoading: false };
     }
