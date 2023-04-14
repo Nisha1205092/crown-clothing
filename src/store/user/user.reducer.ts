@@ -13,6 +13,9 @@ import {
 } from "./user.action";
 import { UserData } from "../../utils/firebase/firebase.utils";
 
+// readonly keyword makes the state immutable
+// to avoid below scenarios inside the reducer
+// state.currentUser = 'blah'
 export type UserState = {
     readonly currentUser: UserData | null;
     readonly isLoading: boolean;
@@ -26,6 +29,7 @@ const INITIAL_STATE: UserState = {
 };
 
 export const userReducer = (state = INITIAL_STATE, action = {} as AnyAction) => {
+    state.currentUser = 'blah'
     if (signInSucess.match(action)) {
         return { ...state, currentUser: action.payload, isLoading: false };
     }
