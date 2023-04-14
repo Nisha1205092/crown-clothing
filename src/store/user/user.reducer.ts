@@ -29,7 +29,6 @@ const INITIAL_STATE: UserState = {
 };
 
 export const userReducer = (state = INITIAL_STATE, action = {} as AnyAction) => {
-    state.currentUser = 'blah'
     if (signInSucess.match(action)) {
         return { ...state, currentUser: action.payload, isLoading: false };
     }
