@@ -6,7 +6,7 @@
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 import { Category } from "../../store/categories/category.types";
-import { Auth, NextOrObserver, User } from "firebase/auth";
+import { NextOrObserver, User } from "firebase/auth";
 import { initializeApp, FirebaseError } from "firebase/app";
 import {
     getAuth,
@@ -27,7 +27,6 @@ import {
     writeBatch,
     getDocs,
     query,
-    QuerySnapshot,
     QueryDocumentSnapshot
 } from 'firebase/firestore';
 const firebaseConfig = {
