@@ -7,7 +7,8 @@ export type Action<T> = {
     type: T;
 }
 
-//function overloading, having same number of parameters but different return types
+//function overloading, having same number of parameters with different param types
+// and can return different return types
 export function createAction<T extends string, P>(type: T, payload: P): ActionWithPayload<T, P>;
 
 export function createAction<T extends string>(type: T, payload: void): Action<T>;

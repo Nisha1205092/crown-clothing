@@ -6,10 +6,12 @@ export type Matchable<AC extends () => AnyAction> = AC & {
 }
 
 // type overloading in TS
-export function withMatcher<AC extends () => AnyAction & { type: string }>(actionCreator: AC): Matchable<AC>;
+export function withMatcher<AC extends () => AnyAction & { type: string }>
+    (actionCreator: AC): Matchable<AC>;
 
 // type overloading in TS
-export function withMatcher<AC extends (...args: any[]) => AnyAction & { type: string }>(actionCreator: AC): Matchable<AC>;
+export function withMatcher<AC extends (...args: any[]) => AnyAction & { type: string }>
+    (actionCreator: AC): Matchable<AC>;
 
 // function implementation in TS
 export function withMatcher(actionCreator: Function) {
