@@ -28,6 +28,7 @@
     "sass": "^1.57.1",
     "stripe": "^11.16.0",
     "styled-components": "^5.3.6",
+    "typed-redux-saga": "^1.5.0",
     "typescript": "^5.0.4",
     "web-vitals": "^2.1.4"
   },
@@ -56,6 +57,7 @@
     ]
   },
   "devDependencies": {
-    "@types/redux-logger": "^3.0.9"
+    "@types/redux-logger": "^3.0.9",
+    "babel-plugin-macros": "^3.1.0"
   }
 }
