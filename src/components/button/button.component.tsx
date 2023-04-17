@@ -44,6 +44,9 @@ export type ButtonProps = {
 
 
 // we are extending upon already existing ''ButtonHTMLAttributes'' component in React
+// ButtonHTMLAttributes<HTMLButtonElement> this part is doing the 'extending' thing
+// and this part is serving for the ...otherprops where it can be any props 
+// allowed in 'HTMLButtonElement'
 const Button: FC<ButtonProps> = ({ children, buttonType, isLoading, ...otherProps }) => {
     const CustomButton = getButton(buttonType);
     return (
