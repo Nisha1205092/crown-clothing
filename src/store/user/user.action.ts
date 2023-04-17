@@ -2,6 +2,7 @@ import { Action, ActionWithPayload, createAction } from "../../utils/reducers/re
 import { withMatcher } from "../categories/category.types";
 import { USER_ACTION_TYPE } from "./user.types";
 import { UserData, AdditionalInfo } from "../../utils/firebase/firebase.utils";
+import { User } from "firebase/auth";
 
 export type SetCurrentUser = ActionWithPayload<USER_ACTION_TYPE.SET_CURRENT_USER, UserData>;
 
@@ -28,7 +29,7 @@ export type SignOutFailed = ActionWithPayload<USER_ACTION_TYPE.SIGN_OUT_FAILED, 
 export type SignUpStart = ActionWithPayload<USER_ACTION_TYPE.SIGN_UP_START, { email: string, password: string, displayName: string }>;
 
 // tricky ones
-export type SignUpSuccess = ActionWithPayload<USER_ACTION_TYPE.SIGN_UP_SUCCESS, { user: UserData, additionalDetails: AdditionalInfo }>;
+export type SignUpSuccess = ActionWithPayload<USER_ACTION_TYPE.SIGN_UP_SUCCESS, { user: User, additionalDetails: AdditionalInfo }>;
 
 export type SignUpFailed = ActionWithPayload<USER_ACTION_TYPE.SIGN_UP_FAILED, Error>;
 
@@ -58,7 +59,7 @@ export const googleRedirectSignInStart = withMatcher(
 );
 
 export const signInSucess = withMatcher(
-    (user: UserData): SignInSucess =>
+    (user: UserData & { id: string }): SignInSucess =>
         createAction(USER_ACTION_TYPE.SIGN_IN_SUCCESS, user)
 );
 
@@ -88,7 +89,7 @@ export const signUpStart = withMatcher(
 );
 
 export const signUpSucess = withMatcher(
-    (user: UserData, additionalDetails: AdditionalInfo): SignUpSuccess =>
+    (user: User, additionalDetails: AdditionalInfo): SignUpSuccess =>
         createAction(USER_ACTION_TYPE.SIGN_UP_SUCCESS, { user, additionalDetails })
 );
 
