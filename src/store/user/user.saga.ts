@@ -21,10 +21,9 @@ import {
     logInWithEmailAndPassword,
     signInWithGoogleRedirect,
     createAuthUserWithEmailAndPassword,
-    AdditionalInfo,
-    UserData
+    AdditionalInfo
 } from "../../utils/firebase/firebase.utils";
-import { User, Auth } from "firebase/auth";
+import { User } from "firebase/auth";
 
 export function* getSnapshotFromUserAuth(userAuth: User, additionalInfo?: AdditionalInfo) {
     try {
