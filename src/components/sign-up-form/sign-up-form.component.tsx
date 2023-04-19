@@ -1,5 +1,5 @@
 import Button from "../button/button.component";
-import { SignUpFormContainer } from "./sign-up-form.styles.jsx";
+import { SignUpFormContainer } from "./sign-up-form.styles";
 import { ChangeEvent, FormEvent, useState } from "react";
 import FormInput from "../form-input/form-input.component";
 import { useDispatch } from "react-redux";
