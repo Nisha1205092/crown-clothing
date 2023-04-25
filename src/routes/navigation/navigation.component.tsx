@@ -32,7 +32,7 @@ const Navigation = () => {
                     {
                         currentUser ?
                             (
-                                <NavLink                                    
+                                <NavLink as='span'
                                     className='nav-link'
                                     onClick={signOutHandler}
                                 >
