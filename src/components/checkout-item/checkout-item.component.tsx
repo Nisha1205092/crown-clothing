@@ -13,8 +13,14 @@ import {
 import { decrementQuantity, incrementQuantity, removeCartItem } from '../../store/cart/cart.action';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCartItems } from '../../store/cart/cart.selector';
+import { FC } from 'react';
+import { CartItem } from '../../store/cart/cart.types';
 
-const CheckoutItem = ({ cartItem }) => {
+type CheckoutItemProps = {
+    cartItem: CartItem;
+}
+
+const CheckoutItem: FC<CheckoutItemProps> = ({ cartItem }) => {
     const dispatch = useDispatch();
     const { name, price, imageUrl, quantity } = cartItem;
     // const { decrementQuantity, incrementQuantity, removeCartItem } = useContext(CartContext);
