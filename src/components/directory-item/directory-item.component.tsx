@@ -5,10 +5,10 @@ import {
 } from './directory-item.styles';
 import { useNavigate } from 'react-router-dom';
 import { FC, useEffect, useState } from 'react';
-import { Directory } from '../directory/directory.component';
+import { DirectoryCategory } from '../directory/directory.component';
 
 type DirectoryItemProps = {
-  category: Directory;
+  category: DirectoryCategory;
 }
 
 const DirectoryItem: FC<DirectoryItemProps> = ({ category }) => {
