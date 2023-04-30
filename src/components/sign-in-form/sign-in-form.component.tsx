@@ -1,6 +1,7 @@
 import {
     ChangeEvent,
     FormEvent,
+    useCallback,
     useState
 } from 'react';
 import FormInput from '../form-input/form-input.component';
@@ -27,28 +28,28 @@ const SignInForm = () => {
     const { email, password } = formFields;
     const dispatch = useDispatch();
 
-    const signInWithGoogleHandler = () => {
+    const signInWithGoogleHandler = useCallback(() => {
         dispatch(googleSignInStart());
-    };
+    }, [dispatch]);
 
-    const signInWithGoogleRedirectHandler = () => {
+    const signInWithGoogleRedirectHandler = useCallback(() => {
         dispatch(googleRedirectSignInStart());
-    };
+    }, [dispatch]);
 
-    const resetFormFields = () => {
+    const resetFormFields = useCallback(() => {
         setFormFields(defaultFormFields);
-    };
+    }, []);
 
-    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const handleChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
         setFormFields({ ...formFields, [name]: value });
-    };
+    }, [formFields]);
 
-    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = useCallback((event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         dispatch(emailSignInStart(email, password));
         resetFormFields();
-    }
+    }, [dispatch, email, password, resetFormFields])
 
     return (
         <SignInFormContainer>

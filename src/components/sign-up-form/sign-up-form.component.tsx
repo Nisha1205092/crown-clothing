@@ -1,6 +1,6 @@
 import Button from "../button/button.component";
 import { SignUpFormContainer } from "./sign-up-form.styles";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useCallback, useState } from "react";
 import FormInput from "../form-input/form-input.component";
 import { useDispatch } from "react-redux";
 import { signUpStart } from "../../store/user/user.action";
@@ -18,14 +18,14 @@ const SignUpForm = () => {
     const { displayName, email, password, confirmPassword } = formFields;
     const dispatch = useDispatch();
 
-    const resetFormFields = () => {
+    const resetFormFields = useCallback(() => {
         setFormFields(defaultFormFields);
-    };
+    }, []);
 
-    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const handleChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
         setFormFields({ ...formFields, [name]: value });
-    };
+    }, [formFields]);
 
     const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();

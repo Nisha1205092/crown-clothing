@@ -13,7 +13,7 @@ import {
 import { decrementQuantity, incrementQuantity, removeCartItem } from '../../store/cart/cart.action';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCartItems } from '../../store/cart/cart.selector';
-import { FC } from 'react';
+import { FC, useCallback } from 'react';
 import { CartItem } from '../../store/cart/cart.types';
 
 type CheckoutItemProps = {
@@ -26,15 +26,17 @@ const CheckoutItem: FC<CheckoutItemProps> = ({ cartItem }) => {
     // const { decrementQuantity, incrementQuantity, removeCartItem } = useContext(CartContext);
     const cartItems = useSelector(selectCartItems);
 
-    const downArroHandler = () => {
+    const downArroHandler = useCallback(() => {
         dispatch(decrementQuantity(cartItem, cartItems));
-    };
-    const upArrowHandler = () => {
+    }, [cartItems, cartItem, dispatch]);
+
+    const upArrowHandler = useCallback(() => {
         dispatch(incrementQuantity(cartItem, cartItems));
-    };
-    const crossHandler = () => {
+    }, [dispatch, cartItem, cartItems]);
+
+    const crossHandler = useCallback(() => {
         dispatch(removeCartItem(cartItem, cartItems));
-    };
+    }, [dispatch, cartItem, cartItems]);
 
     return (
         <CheckoutItemContainer>

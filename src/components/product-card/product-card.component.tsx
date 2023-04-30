@@ -9,7 +9,7 @@ import { addItemToCart } from '../../store/cart/cart.action';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCartItems } from '../../store/cart/cart.selector';
 import { CategoryItem } from '../../store/categories/category.types';
-import { FC } from 'react';
+import { FC, useCallback } from 'react';
 
 type ProductCardProps = {
     product: CategoryItem;
@@ -19,9 +19,9 @@ const ProductCard: FC<ProductCardProps> = ({ product }) => {
     const dispatch = useDispatch();
     const { name, price, imageUrl } = product;
     const cartItems = useSelector(selectCartItems);
-    const addProductToCart = () => {
+    const addProductToCart = useCallback(() => {
         dispatch(addItemToCart(product, cartItems));
-    };
+    }, [dispatch, product, cartItems]);
     return (
         <ProductCardContainer>
             <img src={imageUrl} alt={`${name}`} />
