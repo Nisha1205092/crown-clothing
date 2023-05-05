@@ -44,7 +44,6 @@ const Navigation = () => {
                     <CartIcon />
                 </NavLinksContainer>
                 {isCartOpen && <CartDropdown />}
-
             </NavigationContainer>
             <Outlet />
         </Fragment>

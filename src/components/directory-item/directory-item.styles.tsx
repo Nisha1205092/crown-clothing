@@ -35,6 +35,10 @@ export const DirectoryItemBody = styled.div`
     font-weight: lighter;
     font-size: 16px;
   }
+
+  @media screen and (max-width: 800px) {
+    width: 76px;
+  }
 `;
 
 export const DirectoryItemContainer = styled.div`
