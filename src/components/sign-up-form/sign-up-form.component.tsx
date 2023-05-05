@@ -1,5 +1,5 @@
 import Button from "../button/button.component";
-import { SignUpFormContainer } from "./sign-up-form.styles";
+import { ButtonContainer, SignUpFormContainer } from "./sign-up-form.styles";
 import { ChangeEvent, FormEvent, useCallback, useState } from "react";
 import FormInput from "../form-input/form-input.component";
 import { useDispatch } from "react-redux";
@@ -88,8 +88,9 @@ const SignUpForm = () => {
                     name="confirmPassword"
                     value={confirmPassword}
                 />
-
-                <Button type="submit">Sign Up</Button>
+                <ButtonContainer>
+                    <Button type="submit">Sign Up</Button>
+                </ButtonContainer>
 
             </form>
         </SignUpFormContainer>

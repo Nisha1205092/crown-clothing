@@ -9,4 +9,13 @@ export const SignUpFormContainer = styled.div`
     h2 {
         margin: 10px 0;
     }
+
+    @media screen and (min-width: 800px) {
+        margin: 0 20px 0 0;
+    }
+`;
+
+export const ButtonContainer = styled.div`
+    display: flex;
+    justify-content: center;
 `;

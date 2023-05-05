@@ -5,14 +5,12 @@ export const AuthenticationContainer = styled.div`
     flex-flow: row nowrap;
     justify-content: center;
     column-gap: 70px;
-`;
+    margin: 0 20px;
 
-// /* small screens */
-// @media all and (max-width: 500px) {
-//     .authentication-container {
-//         display: flex;
-//         flex-flow: column wrap;
-//         row-gap: 70px;
-//         margin: auto;
-//     }
-// }
+    @media screen and (max-width: 800px) {
+        display: flex;
+        flex-flow: column wrap;
+        row-gap: 70px;
+        margin: auto;
+    }
+`;
