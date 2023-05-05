@@ -33,21 +33,56 @@ export const ProductCardContainer = styled.div`
       display: flex;
     }
   }
+
+  @media screen and (max-width: 800px) {
+    width: 40vw;
+    
+    button {
+      display: block;
+      opacity: 0.9;
+      min-width: unset;
+      padding: 0 10px;
+      font-size: 12px;
+    }
+    &:hover {
+      img {
+        opacity: unset;
+      }
+
+      button {
+        opacity: unset;
+      }
+    }
+  }
 `;
 
 export const Footer = styled.div`
   width: 100%;
   height: 5%;
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   font-size: 18px;
+
+  @media screen and (max-width: 800px) {
+    font-size: 15px;
+  }
 `;
 
 export const Name = styled.span`
-  width: 90%;
+  width: 75%;
   margin-bottom: 15px;
+
+  @media screen and (max-width: 800px) {
+    width: 60%;
+  }
 `;
 
 export const Price = styled.span`
-  width: 10%;
+  width: 25%;
+  text-align: right;
+
+  @media screen and (max-width: 800px) {
+    width: 40%;
+  }
 `;

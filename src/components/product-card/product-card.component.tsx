@@ -27,7 +27,7 @@ const ProductCard: FC<ProductCardProps> = ({ product }) => {
             <img src={imageUrl} alt={`${name}`} />
             <Footer>
                 <Name>{name}</Name>
-                <Price>{price}</Price>
+                <Price>{`${`$${price}`}`}</Price>
             </Footer>
             <Button buttonType={BUTTON_TYPE_CLASSES.inverted} onClick={addProductToCart}>
                 Add to Cart
