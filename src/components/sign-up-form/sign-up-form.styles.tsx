@@ -15,7 +15,7 @@ export const SignUpFormContainer = styled.div`
     }
 
     @media screen and (max-width: 800px) {
-        width: 70vw;
+        width: 100%;
     }
 `;
 

@@ -10,7 +10,7 @@ export const SignInFormContainer = styled.div`
     }
 
     @media screen and (max-width: 800px) {
-        width: 70vw;
+        width: 100%;
 `;
 
 export const RedirectButtons = styled.div`
@@ -18,11 +18,22 @@ export const RedirectButtons = styled.div`
     flex-flow: column wrap;
     align-items: center;
     
+    @media screen and (max-width: 800px) {
+        button {
+            width: 60%;
+        }
+    }
 `;
 
 export const SignInButtonContainer = styled.div`
     display: flex;
     justify-content: center;
+
+    @media screen and (max-width: 800px) {
+        button {
+            width: 60%;
+        }
+    }
 `;
 
 export const GoogleRedirect = styled.div`
