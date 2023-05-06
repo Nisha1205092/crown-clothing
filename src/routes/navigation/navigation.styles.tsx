@@ -36,6 +36,7 @@ export const NavLinksContainer = styled.div`
 
   @media screen and (max-width: 800px) {
     width: 80%;
+    padding-right: 15px;
   }
 `;
 

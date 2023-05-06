@@ -12,5 +12,7 @@ export const AuthenticationContainer = styled.div`
         flex-flow: column wrap;
         row-gap: 70px;
         margin: auto;
+        justify-content: center;
+        max-width: 70%;
     }
 `;

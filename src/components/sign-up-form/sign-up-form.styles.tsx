@@ -13,6 +13,10 @@ export const SignUpFormContainer = styled.div`
     @media screen and (min-width: 800px) {
         margin: 0 20px 0 0;
     }
+
+    @media screen and (max-width: 800px) {
+        width: 70vw;
+    }
 `;
 
 export const ButtonContainer = styled.div`

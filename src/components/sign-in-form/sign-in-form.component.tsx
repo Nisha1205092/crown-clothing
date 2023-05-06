@@ -7,9 +7,9 @@ import {
 import FormInput from '../form-input/form-input.component';
 import {
     SignInFormContainer,
-    RedirectContainer,
-    RedirectButton,
-    SignInButtonsContainer
+    RedirectButtons,
+    SignInButtonContainer,
+    GoogleRedirect
 } from './sign-in-form.styles';
 import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
 import { useDispatch } from 'react-redux';
@@ -72,19 +72,21 @@ const SignInForm = () => {
                     name="password"
                     value={password}
                 />
-                <RedirectContainer>
-                    <SignInButtonsContainer>
-                        <Button type="submit">Sign In</Button>
-                        <Button type="button" onClick={signInWithGoogleHandler} buttonType={BUTTON_TYPE_CLASSES.google}>
-                            Google Sign In
-                        </Button>
-                    </SignInButtonsContainer>
-                    <RedirectButton>
+                <SignInButtonContainer>
+                    <Button type="submit">Sign In</Button>
+                </SignInButtonContainer>
+
+
+                <RedirectButtons>
+                    <Button type="button" onClick={signInWithGoogleHandler} buttonType={BUTTON_TYPE_CLASSES.google}>
+                        Google Sign In
+                    </Button>
+                    <GoogleRedirect>
                         <Button type="button" onClick={signInWithGoogleRedirectHandler} buttonType={BUTTON_TYPE_CLASSES.redir}>
                             Google Redirect
                         </Button>
-                    </RedirectButton>
-                </RedirectContainer>
+                    </GoogleRedirect>
+                </RedirectButtons>
             </form>
         </SignInFormContainer>
 
