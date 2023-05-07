@@ -3,14 +3,14 @@ import Button from "../button/button.component";
 
 export const PaymentFormContainer = styled.div`
     height: 300px;
-    width: 40vw;
+    width: 50vw;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 
     @media screen and (max-width: 800px) {
-        width: 60vw;
+        width: 80vw;
     }
 `;
 

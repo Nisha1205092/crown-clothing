@@ -6,7 +6,9 @@ import {
     Arrow,
     Value,
     Price,
-    Remove
+    Remove,
+    NameAndQuantityContainer,
+    PriceAndRemoveContainer
 } from './checkout-item.styles';
 // import { CartContext } from '../../contexts/cart.context';
 // import { useContext } from 'react';
@@ -43,20 +45,24 @@ const CheckoutItem: FC<CheckoutItemProps> = ({ cartItem }) => {
             <ImageContainer>
                 <img src={imageUrl} alt={`${name}`} />
             </ImageContainer>
-            <Name> {name} </Name>
-            <Quantity>
-                <Arrow onClick={downArroHandler}>
-                    &#10094;
-                </Arrow>
-                <Value>{quantity}</Value>
-                <Arrow onClick={upArrowHandler}>
-                    &#10095;
-                </Arrow>
-            </Quantity>
-            <Price> {price}</Price>
-            <Remove onClick={crossHandler}>
-                &#10005;
-            </Remove>
+            <NameAndQuantityContainer>
+                <Name> {name} </Name>
+                <Quantity>
+                    <Arrow onClick={downArroHandler}>
+                        &#10094;
+                    </Arrow>
+                    <Value>{quantity}</Value>
+                    <Arrow onClick={upArrowHandler}>
+                        &#10095;
+                    </Arrow>
+                </Quantity>
+            </NameAndQuantityContainer>
+            <PriceAndRemoveContainer>
+                <Price> {`$${price}`}</Price>
+                <Remove onClick={crossHandler}>
+                    &#10005;
+                </Remove>
+            </PriceAndRemoveContainer>
         </CheckoutItemContainer>
     );
 };

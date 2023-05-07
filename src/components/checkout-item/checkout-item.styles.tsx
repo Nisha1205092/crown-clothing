@@ -8,6 +8,16 @@ export const CheckoutItemContainer = styled.div`
   padding: 15px 0;
   font-size: 20px;
   align-items: center;
+  justify-content: space-evenly;
+
+  &:first-child {
+    border-top: 1px solid darkgrey;
+  }
+
+  @media screen and (max-width: 400px) {
+    font-size: 16px;
+    justify-content: center;
+  }
 `;
 
 export const ImageContainer = styled.div`
@@ -18,6 +28,19 @@ export const ImageContainer = styled.div`
     width: 100%;
     height: 100%;
   }
+`;
+
+export const NameAndQuantityContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
+export const PriceAndRemoveContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 export const Name = styled.span`
@@ -39,10 +62,11 @@ export const Value = styled.span`
 
 export const Price = styled.span`
   width: 23%;
+  padding: 15px;
 `;
 
 export const Remove = styled.div`
-  padding-left: 12px;
+  padding: 15px;
   cursor: pointer;
 `;
 
