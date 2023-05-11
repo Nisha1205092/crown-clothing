@@ -7,17 +7,16 @@ import {
 import FormInput from '../form-input/form-input.component';
 import {
     SignInFormContainer,
-    RedirectButtons,
     SignInButtonContainer,
-    GoogleRedirect
+    Google
 } from './sign-in-form.styles';
-import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
+import Button from '../button/button.component';
 import { useDispatch } from 'react-redux';
 import {
     emailSignInStart,
-    googleRedirectSignInStart,
     googleSignInStart
 } from '../../store/user/user.action';
+import { ReactComponent as GoogleSignIn } from '../../assets/google-login.svg';
 
 const defaultFormFields = {
     email: '',
@@ -32,9 +31,9 @@ const SignInForm = () => {
         dispatch(googleSignInStart());
     }, [dispatch]);
 
-    const signInWithGoogleRedirectHandler = useCallback(() => {
-        dispatch(googleRedirectSignInStart());
-    }, [dispatch]);
+    // const signInWithGoogleRedirectHandler = useCallback(() => {
+    //     dispatch(googleRedirectSignInStart());
+    // }, [dispatch]);
 
     const resetFormFields = useCallback(() => {
         setFormFields(defaultFormFields);
@@ -50,6 +49,8 @@ const SignInForm = () => {
         dispatch(emailSignInStart(email, password));
         resetFormFields();
     }, [dispatch, email, password, resetFormFields])
+
+
 
     return (
         <SignInFormContainer>
@@ -76,17 +77,10 @@ const SignInForm = () => {
                     <Button type="submit">Sign In</Button>
                 </SignInButtonContainer>
 
-
-                <RedirectButtons>
-                    <Button type="button" onClick={signInWithGoogleHandler} buttonType={BUTTON_TYPE_CLASSES.google}>
-                        Google Sign In
-                    </Button>
-                    <GoogleRedirect>
-                        <Button type="button" onClick={signInWithGoogleRedirectHandler} buttonType={BUTTON_TYPE_CLASSES.redir}>
-                            Google Redirect
-                        </Button>
-                    </GoogleRedirect>
-                </RedirectButtons>
+                <Google type="submit" onClick={signInWithGoogleHandler}>
+                    <GoogleSignIn width="20px" height="20px" />
+                    <p>Continue with Google</p>
+                </Google>
             </form>
         </SignInFormContainer>
 

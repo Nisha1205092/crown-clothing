@@ -20,7 +20,7 @@ export const RedirectButtons = styled.div`
     
     @media screen and (max-width: 800px) {
         button {
-            width: 60%;
+            display: none;
         }
     }
 `;
@@ -28,16 +28,25 @@ export const RedirectButtons = styled.div`
 export const SignInButtonContainer = styled.div`
     display: flex;
     justify-content: center;
-
-    @media screen and (max-width: 800px) {
-        button {
-            width: 60%;
-        }
-    }
 `;
 
 export const GoogleRedirect = styled.div`
     @media screen and (max-width: 800px) {
         display: none;
+    }
+`;
+
+export const Google = styled.button`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    background: none;
+    border: none;
+    
+    p {
+        font-size: 14px;
+        margin-left: 6px;
     }
 `;
