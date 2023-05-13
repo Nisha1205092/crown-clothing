@@ -14,7 +14,7 @@ export const CheckoutContainer = styled.div`
   }
 
   @media screen and (min-width: 800px) {
-    width: 60vw;
+    width: 40vw;
   }
 `;
 
