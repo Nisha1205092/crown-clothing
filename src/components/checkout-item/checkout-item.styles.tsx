@@ -3,7 +3,8 @@ import styled from "styled-components";
 export const CheckoutItemContainer = styled.div`
   width: 100%;
   display: grid;
-  grid-template-column: 2fr 2fr 1fr;
+  grid-template-columns: 300px 100px 100px;
+  grid-template-rows: 150px;
   gap: 5px;
   min-height: 100px;
   border-bottom: 1px solid darkgrey;
@@ -16,14 +17,16 @@ export const CheckoutItemContainer = styled.div`
     border-top: 1px solid darkgrey;
   }
 
-  @media screen and (max-width: 400px) {
+  @media screen and (max-width: 600px) {
     font-size: 16px;
     justify-content: center;
+    grid-template-columns: 2fr 1fr 1fr;
   }
 `;
 
 export const ImageContainer = styled.div`
-  width: 23%;
+  height: 100%;
+  width: fit-content;
   padding-right: 15px;
 
   img {
