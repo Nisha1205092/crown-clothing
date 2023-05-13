@@ -4,6 +4,7 @@ import Button from "../button/button.component";
 export const PaymentFormContainer = styled.div`
     height: 300px;
     width: 50vw;
+    max-width: 500px;
     display: flex;
     flex-direction: column;
     align-items: center;

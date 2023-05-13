@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const CheckoutContainer = styled.div`
   width: 80%;
+  max-width: 700px;
   min-height: 90vh;
   display: flex;
   flex-direction: column;
