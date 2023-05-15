@@ -22,13 +22,14 @@ import {
     getFirestore,
     doc,
     getDoc,
-    setDoc, 
-    collection, 
+    setDoc,
+    collection,
     writeBatch,
     getDocs,
     query,
     QueryDocumentSnapshot
 } from 'firebase/firestore';
+
 const firebaseConfig = {
     apiKey: "AIzaSyCFzjDEBfof0wUkkua0weBqGYIt_0zcV58",
     authDomain: "crown-clothing-db-ab56b.firebaseapp.com",
@@ -53,18 +54,18 @@ export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider)
 export const signInWithGoogleRedirect = () => signInWithRedirect(auth, googleProvider);
 
 export const db = getFirestore();
- 
+
 export type ObjectToAdd = {
     title: string;
 }
 // for populating firebase database with categories and products initially, unused now
 export const addCollectionAndDocuments = async <T extends ObjectToAdd>(
-    collectionKey: string, 
+    collectionKey: string,
     objectsToAdd: T[]
-    ): Promise<void> => {
+): Promise<void> => {
     const collectionRef = collection(db, collectionKey);
     const batch = writeBatch(db);
-    
+
     objectsToAdd.forEach((object) => {
         const docRef = doc(collectionRef, object.title.toLowerCase());
         batch.set(docRef, object);
@@ -84,7 +85,7 @@ export const getCategoriesAndDocuments = async (): Promise<Category[]> => {
     //     return acc;
     // }, {});
     // return categoryMap;
-    
+
     /*
     [
         {
@@ -105,7 +106,7 @@ export const getCategoriesAndDocuments = async (): Promise<Category[]> => {
         {..}
     ]
     */
-    
+
 }
 
 export type AdditionalInfo = {
@@ -119,9 +120,9 @@ export type UserData = {
 }
 
 export const createUserDocumentFromAuth = async (
-    userAuth: User, 
+    userAuth: User,
     additionalInfo = {} as AdditionalInfo
-    ): Promise<void | QueryDocumentSnapshot<UserData> > => {
+): Promise<void | QueryDocumentSnapshot<UserData>> => {
     if (!userAuth) {
         console.log('userAuth does not exist!');
         return;
@@ -158,26 +159,26 @@ export const createAuthUserWithEmailAndPassword = async (email: string, password
 ///////////////////////////////////
 // help from ChatGPT
 interface FirebaseAuthError extends FirebaseError {
-  code: string;
-  message: string;
+    code: string;
+    message: string;
 }
 // Function to handle login with email and password
 export const logInWithEmailAndPassword = async (email: string, password: string) => {
-  try {
-    return await signInWithEmailAndPassword(auth, email, password);
-  } catch (error) {
-    const firebaseError = error as FirebaseAuthError;
-    switch (firebaseError.code) {
-      case 'auth/user-not-found':
-        alert('Email not found!');
-        break;
-      case 'auth/wrong-password':
-        alert('Password does not match!');
-        break;
-      default:
-        console.log(firebaseError.message);
+    try {
+        return await signInWithEmailAndPassword(auth, email, password);
+    } catch (error) {
+        const firebaseError = error as FirebaseAuthError;
+        switch (firebaseError.code) {
+            case 'auth/user-not-found':
+                alert('Email not found!');
+                break;
+            case 'auth/wrong-password':
+                alert('Password does not match!');
+                break;
+            default:
+                console.log(firebaseError.message);
+        }
     }
-  }
 };
 
 export const signOutUser = async () => await signOut(auth);

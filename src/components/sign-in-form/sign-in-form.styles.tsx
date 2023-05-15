@@ -44,6 +44,7 @@ export const Google = styled.button`
     margin: auto;
     background: none;
     border: none;
+    cursor: pointer;
     
     p {
         font-size: 14px;

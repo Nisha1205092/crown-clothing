@@ -17,12 +17,14 @@ import {
     googleSignInStart
 } from '../../store/user/user.action';
 import { ReactComponent as GoogleSignIn } from '../../assets/google-login.svg';
+// import { useNavigate } from 'react-router-dom';
 
 const defaultFormFields = {
     email: '',
     password: ''
 };
 const SignInForm = () => {
+    // const navigate = useNavigate();
     const [formFields, setFormFields] = useState(defaultFormFields);
     const { email, password } = formFields;
     const dispatch = useDispatch();
@@ -48,6 +50,7 @@ const SignInForm = () => {
         event.preventDefault();
         dispatch(emailSignInStart(email, password));
         resetFormFields();
+        // navigate('/'); //redirect to home page after successful signin
     }, [dispatch, email, password, resetFormFields])
 
 
@@ -77,7 +80,7 @@ const SignInForm = () => {
                     <Button type="submit">Sign In</Button>
                 </SignInButtonContainer>
 
-                <Google type="submit" onClick={signInWithGoogleHandler}>
+                <Google type="button" onClick={signInWithGoogleHandler}>
                     <GoogleSignIn width="20px" height="20px" />
                     <p>Continue with Google</p>
                 </Google>
