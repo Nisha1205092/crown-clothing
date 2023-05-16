@@ -5,10 +5,14 @@ import Spinner from "../../components/spinner/spinner.component";
 import { Fragment, useEffect, useState } from 'react';
 import { AuthenticationContainer } from './authentication.styles';
 import { selectUserIsLoading } from "../../store/user/user.selector";
+import { store } from "../../store/store";
+import { useNavigate } from "react-router-dom";
 
 const Authentication = () => {
     const userIsLoading = useSelector(selectUserIsLoading);
+    const userStore:any = useSelector(store => store);
     const [showComponents, setShowComponents] = useState(false);
+    const navigate = useNavigate();
 
     // when a signin error happens, the page gets stuck in a 
     // Loading state. So we have added a three sec timeout
@@ -21,6 +25,13 @@ const Authentication = () => {
 
         return () => clearTimeout(timeoutId);
     }, []);
+
+    //check if the user is logged-in, if not redirect
+    useEffect(() => {
+        if(userStore.user.currentUser !== null) {
+            navigate('/shop');
+        }
+    }, [userStore]);
 
     return (
         <Fragment>
