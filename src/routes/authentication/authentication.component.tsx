@@ -51,17 +51,6 @@ const Authentication = () => {
             )}
         </Fragment>
     );
-    // return (
-    //     <Fragment>
-    //         {
-    //             userIsLoading ? <Spinner /> :
-    //                 (<AuthenticationContainer>
-    //                     <SignInForm />
-    //                     <SignUpForm />
-    //                 </AuthenticationContainer>)
-    //         }
-    //     </Fragment>
-    // );
 }
 
 export default Authentication;
