@@ -1,25 +1,21 @@
-import CheckoutItem from '../../components/checkout-item/checkout-item.component';
 import {
-    CheckoutContainer,
-    Total
+    CheckoutContainer
 } from './checkout.styles';
+import CheckoutBox from '../../components/checkout/checkoutBox.component';
+import { selectCartItems } from '../../store/cart/cart.selector';
 import { useSelector } from 'react-redux';
-import { selectCartItems, selectTotalPrice } from '../../store/cart/cart.selector';
-import PaymentForm from '../../components/payment-form/payment-form.component';
+import { EmptyMessage } from '../../components/cart-dropdown/cart-dropdown.styles';
 
 const Checkout = () => {
     const cartItems = useSelector(selectCartItems);
-    const totalPrice = useSelector(selectTotalPrice);
-
     return (
         <CheckoutContainer>
             {
-                cartItems.map(item =>
-                    <CheckoutItem key={item.id} cartItem={item} />
-                )
+                cartItems.length
+                    ? <CheckoutBox />
+                    : <EmptyMessage>Your Cart is Empty</EmptyMessage>
             }
-            <Total>TOTAL: ${totalPrice}</Total>
-            <PaymentForm />
+
         </CheckoutContainer>
     );
 };
