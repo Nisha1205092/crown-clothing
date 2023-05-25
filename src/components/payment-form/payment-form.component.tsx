@@ -71,6 +71,7 @@ const PaymentForm = () => {
                 <PaymentButton
                     isLoading={isProcessingPayment}
                     buttonType={BUTTON_TYPE_CLASSES.inverted}
+                    disabled={amount > 0 ? false : true}
                 >
                     Pay now
                 </PaymentButton>
