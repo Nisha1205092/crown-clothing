@@ -10,6 +10,7 @@ import './index.scss';
 import App from './App';
 import { store, persistor } from './store/store';
 import * as serviceWorker from './serviceWorkerRegistration';
+import { MyThemeProvider } from './contexts/theme.context';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -18,7 +19,9 @@ root.render(
       <PersistGate persistor={persistor}>
         <BrowserRouter>
           <Elements stripe={stripePromise}>
-            <App />
+            <MyThemeProvider>
+              <App />
+            </MyThemeProvider>
           </Elements>
         </BrowserRouter>
       </PersistGate>

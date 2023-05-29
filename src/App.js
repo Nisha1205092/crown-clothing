@@ -1,10 +1,16 @@
 import Home from "./routes/home/home.component";
 import { Routes, Route } from 'react-router-dom';
-import { useEffect, lazy, Suspense } from "react";
+import { useEffect, lazy, Suspense, useContext, useCallback } from "react";
 import { checkUserSession } from "./store/user/user.action";
 import { useDispatch } from "react-redux";
 import Spinner from "./components/spinner/spinner.component";
 import GlobalStyle from "./global.styles";
+//theme code
+import { ThemeProvider } from "styled-components";
+import { lightTheme, darkTheme } from "./components/theme/theme";
+import DarkModeToggle from "./components/DarkModeToggle/DarkModeToggle.component";
+import { DARK, LIGHT, ThemeContext } from "./contexts/theme.context";
+//theme code
 
 const Navigation = lazy(() => import("./routes/navigation/navigation.component"));
 const Authentication = lazy(() => import("./routes/authentication/authentication.component"));
@@ -12,6 +18,33 @@ const Shop = lazy(() => import("./routes/shop/shop.component"));
 const Checkout = lazy(() => import("./routes/checkout/checkout.component"));
 
 const App = () => {
+  // theme code
+  const { myTheme, setMyTheme } = useContext(ThemeContext);
+
+  const handleThemeChange = useCallback((event) => {
+    if (event.matches) {
+      console.log("Dark mode is enabled in the browser.");
+      setMyTheme(DARK);
+    } else {
+      console.log("Dark mode is not enabled in the browser.");
+      setMyTheme(LIGHT);
+    }
+  }, [setMyTheme]);
+
+  const prefersDarkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+  prefersDarkModeQuery.onchange = handleThemeChange;
+
+  const themeToggler = () => {
+    myTheme === 'light' ? setMyTheme(DARK) : setMyTheme(LIGHT)
+  }
+  const setLightTheme = () => {
+    setMyTheme(LIGHT);
+  }
+  const setDarkTheme = () => {
+    setMyTheme(DARK);
+  }
+  // theme code
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -20,15 +53,19 @@ const App = () => {
 
   return (
     <Suspense fallback={<Spinner />}>
-      <GlobalStyle />
-      <Routes>
-        <Route path="/" element={<Navigation />} >
-          <Route index element={<Home />} />
-          <Route path="shop/*" element={<Shop />} />
-          <Route path="auth" element={<Authentication />} />
-          <Route path="checkout" element={<Checkout />} />
-        </Route>
-      </Routes>
+      <ThemeProvider theme={myTheme === LIGHT ? lightTheme : darkTheme}>
+        <GlobalStyle />
+        <DarkModeToggle toggle={themeToggler} setLight={setLightTheme} setDark={setDarkTheme} />
+        {/* <button onClick={themeToggler}>Switch Theme</button> */}
+        <Routes>
+          <Route path="/" element={<Navigation />} >
+            <Route index element={<Home />} />
+            <Route path="shop/*" element={<Shop />} />
+            <Route path="auth" element={<Authentication />} />
+            <Route path="checkout" element={<Checkout />} />
+          </Route>
+        </Routes>
+      </ThemeProvider>
     </Suspense>
   );
 }
