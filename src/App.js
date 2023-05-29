@@ -1,15 +1,15 @@
 import Home from "./routes/home/home.component";
 import { Routes, Route } from 'react-router-dom';
-import { useEffect, lazy, Suspense, useContext, useCallback } from "react";
+import { useEffect, lazy, Suspense } from "react";
 import { checkUserSession } from "./store/user/user.action";
 import { useDispatch } from "react-redux";
 import Spinner from "./components/spinner/spinner.component";
 import GlobalStyle from "./global.styles";
 //theme code
 import { ThemeProvider } from "styled-components";
-import { lightTheme, darkTheme } from "./components/theme/theme";
+import { lightTheme, darkTheme, useTheme } from "./utils/theme/theme.utils";
 import DarkModeToggle from "./components/DarkModeToggle/DarkModeToggle.component";
-import { DARK, LIGHT, ThemeContext } from "./contexts/theme.context";
+import { LIGHT } from "./contexts/theme.context";
 //theme code
 
 const Navigation = lazy(() => import("./routes/navigation/navigation.component"));
@@ -18,33 +18,8 @@ const Shop = lazy(() => import("./routes/shop/shop.component"));
 const Checkout = lazy(() => import("./routes/checkout/checkout.component"));
 
 const App = () => {
+  const { myTheme, themeToggler, setLightTheme, setDarkTheme } = useTheme();
   // theme code
-  const { myTheme, setMyTheme } = useContext(ThemeContext);
-
-  const handleThemeChange = useCallback((event) => {
-    if (event.matches) {
-      console.log("Dark mode is enabled in the browser.");
-      setMyTheme(DARK);
-    } else {
-      console.log("Dark mode is not enabled in the browser.");
-      setMyTheme(LIGHT);
-    }
-  }, [setMyTheme]);
-
-  const prefersDarkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
-  prefersDarkModeQuery.onchange = handleThemeChange;
-
-  const themeToggler = () => {
-    myTheme === 'light' ? setMyTheme(DARK) : setMyTheme(LIGHT)
-  }
-  const setLightTheme = () => {
-    setMyTheme(LIGHT);
-  }
-  const setDarkTheme = () => {
-    setMyTheme(DARK);
-  }
-  // theme code
-
   const dispatch = useDispatch();
 
   useEffect(() => {
