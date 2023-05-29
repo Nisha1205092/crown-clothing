@@ -13,12 +13,18 @@ import CartDropdown from '../../components/cart-dropdown/cart-dropdown.component
 import { selectCurrentUser } from '../../store/user/user.selector';
 import { selectIsCartOpen } from '../../store/cart/cart.selector';
 import { signOutStart } from '../../store/user/user.action';
+import { useTheme } from '../../utils/theme/theme.utils';
+import DarkModeToggle from '../../components/DarkModeToggle/DarkModeToggle.component';
 
 const Navigation = () => {
     const dispatch = useDispatch();
     const signOutHandler = () => dispatch(signOutStart());
     const currentUser = useSelector(selectCurrentUser);
     const isCartOpen = useSelector(selectIsCartOpen);
+
+    const { themeToggler, setLightTheme, setDarkTheme } = useTheme();
+
+
     return (
         <Fragment>
             <NavigationContainer>
@@ -42,6 +48,7 @@ const Navigation = () => {
                             : (<NavLink to='/auth'>SIGNIN</NavLink>)
                     }
                     <CartIcon />
+                    <DarkModeToggle toggle={themeToggler} setLight={setLightTheme} setDark={setDarkTheme} />
                 </NavLinksContainer>
                 {isCartOpen && <CartDropdown />}
             </NavigationContainer>
