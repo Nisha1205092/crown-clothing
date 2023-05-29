@@ -24,7 +24,6 @@ const Navigation = () => {
 
     const { themeToggler, setLightTheme, setDarkTheme } = useTheme();
 
-
     return (
         <Fragment>
             <NavigationContainer>
