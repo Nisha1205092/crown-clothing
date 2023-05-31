@@ -18,6 +18,8 @@ const Checkout = lazy(() => import("./routes/checkout/checkout.component"));
 
 const App = () => {
   const { myTheme } = useTheme();
+  const userPref = localStorage.themePreference;
+  console.log({ myTheme, userPref });
 
   const dispatch = useDispatch();
 

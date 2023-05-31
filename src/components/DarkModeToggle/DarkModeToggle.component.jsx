@@ -7,7 +7,7 @@ const DarkModeToggle = ({ toggle, setLight, setDark }) => {
             <button type="button" onClick={setLight}>
                 ☀
             </button>
-            <Toggle checked={setLight} onChange={toggle} />
+            <Toggle onChange={toggle} />
             <button type="button" onClick={setDark}>
                 ☾
             </button>

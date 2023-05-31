@@ -28,14 +28,23 @@ export const useTheme = () => {
     }, [setMyTheme]);
 
     useEffect(() => {
-        const prefersDarkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
-        prefersDarkModeQuery.addListener(handleThemeChange);
-        handleThemeChange(prefersDarkModeQuery); // Initial theme check
+        console.log('inside theme.utils-->useEffect');
+        if (localStorage.themePreference) {
+            console.log('getting user theme preference');
+            setMyTheme(localStorage.themePreference);
+        } else {
+            const prefersDarkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+            prefersDarkModeQuery.addEventListener("change", handleThemeChange);
 
-        return () => {
-            prefersDarkModeQuery.removeListener(handleThemeChange);
-        };
-    }, [handleThemeChange]);
+            // this makes the theme according to system preference always
+            handleThemeChange(prefersDarkModeQuery); // Initial theme check
+
+            return () => {
+                prefersDarkModeQuery.removeEventListener("change", handleThemeChange);
+            };
+        }
+
+    }, [handleThemeChange, setMyTheme]);
 
     const themeToggler = () => {
         const newTheme = myTheme === LIGHT ? DARK : LIGHT;
