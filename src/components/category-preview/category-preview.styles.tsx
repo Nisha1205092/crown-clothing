@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { primaryTextColor, primaryTextHoverColor } from "../../utils/theme/theme.utils";
 
 export const CategoryPreviewContainer = styled.div`
   display: flex;
@@ -14,6 +15,12 @@ export const Title = styled(Link)`
   font-size: 28px;
   margin-bottom: 25px;
   cursor: pointer;
+  color: ${primaryTextColor};
+  text-decoration: none;
+
+  &:hover {
+    color: ${primaryTextHoverColor};
+  }
 `;
 
 export const Preview = styled.div`

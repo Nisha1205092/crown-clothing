@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { DARK } from '../../contexts/theme.context';
 
 export const Checkbox = styled.input.attrs({ type: 'checkbox' })`
   width: 40px;
@@ -26,7 +27,7 @@ export const Label = styled.label<{ $theme?: string; }>`
   background: #fff;
   opacity: 0.9;
   background-color: #f6f6f6;
-  translate: ${props => props.$theme === 'dark' ? "35px" : "unset"};
+  translate: ${props => props.$theme === DARK ? "35px" : "unset"};
 `;
 
 export const ToggleControl = styled.span`

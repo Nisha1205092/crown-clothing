@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { primaryTextColor, primaryTextHoverColor } from '../../utils/theme/theme.utils';
 
 export const NavigationContainer = styled.div`
   height: 70px;
@@ -33,9 +34,15 @@ export const NavLinksContainer = styled.div`
   }
 `;
 
-export const NavLink = styled(Link)`
+export const NavLink = styled(Link) <{ $theme?: string; }>`
   padding: 10px 15px;
   cursor: pointer;
+  text-decoration: none;
+  color: ${primaryTextColor};
+
+  &:hover {
+    color: ${primaryTextHoverColor};
+  }
 `;
 
 

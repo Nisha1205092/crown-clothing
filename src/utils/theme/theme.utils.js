@@ -1,6 +1,10 @@
 import { useEffect, useCallback, useContext } from 'react';
 import { LIGHT, DARK, ThemeContext } from '../../contexts/theme.context';
 
+export const primaryTextColor = '#06A6CC';
+export const primaryTextHoverColor = '#02667F';
+export const buttonColor = '#02667F';
+
 export const lightTheme = {
     body: '#FFF',
     text: '#363537',
