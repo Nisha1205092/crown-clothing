@@ -3,7 +3,6 @@ import { primaryTextColor } from "../../utils/theme/theme.utils";
 
 export const DarkModeToggleContainer = styled.div`
     display: flex;
-    margin: 0 auto;
     & > button {
         font-size: 1.2em;
         background: none;
