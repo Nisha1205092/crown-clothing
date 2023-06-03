@@ -34,6 +34,7 @@ export const DirectoryItemBody = styled.div`
   p {
     font-weight: lighter;
     font-size: 16px;
+    color: black;
   }
 
   @media screen and (max-width: 800px) {

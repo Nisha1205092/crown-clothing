@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { primaryTextColor } from "../../utils/theme/theme.utils";
 
 export const DarkModeToggleContainer = styled.div`
     display: flex;
@@ -11,7 +12,7 @@ export const DarkModeToggleContainer = styled.div`
         cursor: pointer;
         transition: color 0.3s ease;
         &:last-child {
-            color: #666;
+            color: ${primaryTextColor};
         }
 
         &:focus {

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { DARK } from "../../contexts/theme.context";
 
 export const SignInFormContainer = styled.div`
     display: flex;
@@ -50,4 +51,8 @@ export const Google = styled.button`
         font-size: 14px;
         margin-left: 6px;
     }
+`;
+
+export const GoogleSignInText = styled.p<{ $theme?: string; }>`
+    color: ${props => props.$theme === DARK ? "white" : "black"};
 `;

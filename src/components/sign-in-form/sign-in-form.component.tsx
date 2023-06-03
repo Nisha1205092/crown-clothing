@@ -2,13 +2,15 @@ import {
     ChangeEvent,
     FormEvent,
     useCallback,
+    useContext,
     useState
 } from 'react';
 import FormInput from '../form-input/form-input.component';
 import {
     SignInFormContainer,
     SignInButtonContainer,
-    Google
+    Google,
+    GoogleSignInText
 } from './sign-in-form.styles';
 import Button from '../button/button.component';
 import { useDispatch } from 'react-redux';
@@ -17,6 +19,7 @@ import {
     googleSignInStart
 } from '../../store/user/user.action';
 import { ReactComponent as GoogleSignIn } from '../../assets/google-login.svg';
+import { ThemeContext } from '../../contexts/theme.context';
 // import { useNavigate } from 'react-router-dom';
 
 const defaultFormFields = {
@@ -24,7 +27,7 @@ const defaultFormFields = {
     password: ''
 };
 const SignInForm = () => {
-    // const navigate = useNavigate();
+    const { myTheme } = useContext(ThemeContext);
     const [formFields, setFormFields] = useState(defaultFormFields);
     const { email, password } = formFields;
     const dispatch = useDispatch();
@@ -82,7 +85,7 @@ const SignInForm = () => {
 
                 <Google type="button" onClick={signInWithGoogleHandler}>
                     <GoogleSignIn width="20px" height="20px" />
-                    <p>Continue with Google</p>
+                    <GoogleSignInText $theme={myTheme}>Continue with Google</GoogleSignInText>
                 </Google>
             </form>
         </SignInFormContainer>
