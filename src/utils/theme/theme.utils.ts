@@ -24,8 +24,8 @@ export const darkTheme = {
 export const useTheme = () => {
     const { myTheme, setMyTheme } = useContext(ThemeContext);
 
-    const handleThemeChange = useCallback((event) => {
-        const newTheme = event.matches ? DARK : LIGHT;
+    const handleThemeChange = useCallback((event: MediaQueryListEvent) => {
+        const newTheme: string = event.matches ? DARK : LIGHT;
         console.log(`Theme changed to ${newTheme}`);
         setMyTheme(newTheme);
         localStorage.setItem("themePreference", newTheme);
@@ -41,7 +41,7 @@ export const useTheme = () => {
             prefersDarkModeQuery.addEventListener("change", handleThemeChange);
 
             // this makes the theme according to system preference always
-            handleThemeChange(prefersDarkModeQuery); // Initial theme check
+            // handleThemeChange(prefersDarkModeQuery); // Initial theme check
 
             return () => {
                 prefersDarkModeQuery.removeEventListener("change", handleThemeChange);

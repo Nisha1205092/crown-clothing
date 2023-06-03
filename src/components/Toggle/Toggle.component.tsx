@@ -1,8 +1,11 @@
 import { Checkbox, Label, ToggleControl } from "./Toggle.styles";
-import { useContext } from "react";
+import { useContext, FC, ChangeEventHandler } from "react";
 import { ThemeContext } from "../../contexts/theme.context";
 
-const Toggle = ({ onChange }) => {
+type ToggleProps = {
+    onChange: ChangeEventHandler<HTMLInputElement>;
+}
+const Toggle: FC<ToggleProps> = ({ onChange }) => {
     const { myTheme } = useContext(ThemeContext);
 
     return (

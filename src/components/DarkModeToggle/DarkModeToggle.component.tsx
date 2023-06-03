@@ -1,7 +1,13 @@
 import { DarkModeToggleContainer } from './DarkModeToggle.styles';
 import Toggle from '../Toggle/Toggle.component';
+import { FC } from 'react';
 
-const DarkModeToggle = ({ toggle, setLight, setDark }) => {
+type DarkModeToggleProps = {
+    toggle: () => void;
+    setLight: () => void;
+    setDark: () => void;
+}
+const DarkModeToggle: FC<DarkModeToggleProps> = ({ toggle, setLight, setDark }) => {
     return (
         <DarkModeToggleContainer>
             <button type="button" onClick={setLight}>
