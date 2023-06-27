@@ -8,7 +8,7 @@ const GlobalStyle = createGlobalStyle`
     }
     body {
         transition: all 0.50s linear;
-        font-family: 'Open Sans Condensed';
+        font-family: 'Oswald', sans-serif;
         padding: 30px 20px;
     }
 `;
