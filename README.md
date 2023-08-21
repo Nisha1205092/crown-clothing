@@ -9,6 +9,7 @@ This project is gradually improved using more advanced topics, e.g., this was in
 - Sign-in with Google account 
 - Shop by categories
 - Add items to Cart
+- Cart items persist for the user
 - Go to checkout page
 - Increase or decrease Cart Item quantity
 - Delete Cart Item
